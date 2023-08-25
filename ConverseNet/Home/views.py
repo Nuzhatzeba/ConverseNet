@@ -5,3 +5,5 @@ def index(request):
     return render(request, "Home/index.html", {})
 def login(request):
     return render(request, 'Home/login.html',{})
+def signin(request):
+    return render(request,'Home/signin.html',{})
