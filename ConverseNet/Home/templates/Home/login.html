@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@3.6.2/dist/full.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script><!--    daisyUI links-->
+    <script src="https://cdn.tailwindcss.com"></script><!--    tailwindcss link-->
+    <style>
+
+.input-field {
+  display: block;
+  width: 60%;
+  font-size: 16px;
+  border: none;
+  border-bottom: 2px solid #ccc;
+  outline: none;
+  background-color: transparent;
+}
+
+    </style>
+</head>
+<body>
+
+    <div class="flex w-full bg-[#77A8CC]">
+      <div class="grid w-4/12 h-screen flex-grow  place-items-center">
+          {% load static %}
+          <img src="{% static 'loginImage.png' %}" alt="" srcset="">
+      </div>
+      <div class="grid w-80 h-screen overflow-auto flex-grow card bg-[#FFF] rounded-box place-items-center">
+          <h1 class="text-2xl font-bold">Create Account</h1>
+          <div class="input-container">
+              <div class="flex">
+              <label class="font-bold text-slate-600 mr-16">First Name : </label><input placeholder="First Name" class="input-field " type="text">
+              </div><br>
+              <div class="flex">
+              <label class="font-bold text-slate-600 mr-16">Last Name :</label><input placeholder="Last Name" class="input-field" type="text">
+              </div><br>
+              <div class="flex">
+                  <label class="font-bold text-slate-600 mr-10">Email Address :</label><input placeholder="Email Address" class="input-field" type="text">
+              </div><br>
+              <div class="gender text-slate-400">
+                  <label class="font-bold text-slate-600 mr-20">Gender :</label>
+                 <input checked="" name="gender" id="check-male" type="radio">
+                <label  for="check-male">Male</label>
+                <input name="gender" id="check-female" type="radio">
+                <label for="check-female">Female</label>
+                <input name="gender" id="check-other" type="radio">
+                <label for="check-other">Prefer not to say</label>
+              </div><br>
+              <label class="font-bold text-slate-600 mr-16">Birth Date :</label>
+              <input class="text-slate-400" required="" placeholder="Enter birth date" type="date"><br>
+              <div class="flex">
+                  <label class="font-bold text-slate-600 mr-20">Password:</label><input placeholder="Password" class="input-field" type="text">
+              </div><br>
+              <div class="flex">
+                  <label class="font-bold text-slate-600 mr-3">Confirm Password:</label><input placeholder="Confirm Password" class="input-field" type="text">
+              </div><br>
+              <div>
+              <button class="btn btn-xs sm:btn-sm md:btn-md lg:btn-sm font-medium bg-[#77A8CC] text-[#FFF]">Create Account</button></div><br>
+              <div class="flex items-center">
+              <p>Already have an account?  </p><button class="btn btn-xs sm:btn-sm md:btn-md lg:btn-sm font-medium bg-[#77A8CC] text-[#FFF]">Sign-In</button>
+              </div>
+          </div>
+      </div>
+    </div>
+
+</body>
+</html>
