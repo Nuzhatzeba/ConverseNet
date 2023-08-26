@@ -1,6 +1,14 @@
 from django.shortcuts import render
-
+from django.contrib.auth.models import User
+from django.http import HttpResponseRedirect
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from django.urls import reverse
 # Create your views here.
+from .models import ConverseNetUser, Profile, Bot_Message, FriendsThread, Requests, FriendsThreadMessage, Diary
+from .forms import ClientForm
+
+
 def index(request):
     return render(request, "Home/index.html", {})
 def login(request):
