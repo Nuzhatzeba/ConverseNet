@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dairy Page</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Secular+One&display=swap" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body {
+       margin: 0;
+       padding: 0;
+       height: 500px;
+       width: 100%;
+       background-image: url(https://dm0qx8t0i9gc9.cloudfront.net/watermarks/image/rDtN98Qoishumwih/light-blue-background_GkNvxFHd_SB_PM.jpg);
+       background-size: cover;
+       background-position: relative;
+       position: relative;
+    }
+.scroll-bg {   margin:10% auto;
+
+                width: 400px;
+
+                background:sky blue;
+                padding:10px 20px;
+
+            }
+            .scroll-div {
+
+                width: 450px;
+                height: 300px;
+                overflow: hidden;
+                overflow-y: scroll;
+
+
+            }
+            .scroll-object {
+               color:sky blue;
+                font-family:cursive;
+                font-size:16px;
+                padding:15px;
+                width:500px;
+
+
+            }
+.value{
+color : sky blue;
+font-weight: bold;
+}
+.p{
+font-weight: bold;
+font-family: 'Secular One', sans-serif;
+}
+        * {
+            outline:none;
+              border:none;
+              margin:0px;
+              padding:0px;
+              font-family:Courier, monospace;
+          }
+          #paper {
+              color:#FFF;
+              font-size:20px;
+          }
+          #margin {
+              margin-left:12px;
+              margin-bottom:20px;
+              -webkit-user-select: none;
+              -moz-user-select: none;
+              -ms-user-select: none;
+              -o-user-select: none;
+              user-select: none;
+          }
+          #text {
+              width:500px;
+              overflow:hidden;
+              background-color:#FFF;
+              color:#203354;
+              font-family:Courier, monospace;
+              font-weight:normal;
+              font-size:24px;
+              resize:none;
+              line-height:40px;
+              padding-left:100px;
+              padding-right:100px;
+              padding-top:45px;
+              padding-bottom:34px;
+              background-image:url(https://static.tumblr.com/maopbtg/E9Bmgtoht/lines.png), url(https://static.tumblr.com/maopbtg/nBUmgtogx/paper.png);
+              background-repeat:repeat-y, repeat;
+              -webkit-border-radius:12px;
+              border-radius:12px;
+              -webkit-box-shadow: 0px 2px 14px #000;
+              box-shadow: 0px 2px 14px #000;
+              border-top:1px solid #FFF;
+              border-bottom:1px solid #FFF;
+          }
+          #title {
+              background-color:#9DC1E6;
+              border-bottom:3px solid #FFF;
+              color:#203354;
+              font-size:20px;
+              font-family:Courier, monospace;
+              height:28px;
+              font-weight:bold;
+              width:220px;
+          }
+
+          #wrapper {
+              width:px;
+              height:auto;
+              margin-left:auto;
+              margin-right:auto;
+              margin-top:24px;
+              margin-bottom:100px;
+          }
+
+</style>
+</head>
+<body >
+<section>
+    <div class="container py-5">
+      <div class="row">
+        <div class="col">
+        </div>
+      </div>
+        <br>
+
+           <div class="row">
+        <div class="col-lg-5.5">
+          <div class="card mb-4">
+            <div class="card-body container text-center">
+              <img src="https://media.tenor.com/kPHaBTewTHoAAAAC/writing.gif" alt="avatar"
+                class="rounded-circle img-fluid" style="width: 150px;">
+
+              <h5 class="my-3"><b></b></h5>
+                <form method="POST">
+                <h5 class="my-3 "><b>Title : </b> <input id="title" type="text" name="title"></h5>
+<!--                <h5 class="my-3">Date : <input type="date" id="date"></h5>-->
+               <form method="POST">
+
+              <div class="form-group">
+                  <textarea placeholder="Enter something" id="text" name="notes" rows="4" style="overflow: hidden; word-wrap: break-word; resize: none; height: 160px; "></textarea>
+<!--              <textarea  class="form-control rounded-0" id="exampleFormControlTextarea2" rows="1" name="about_info"></textarea>-->
+              </div>
+              <div class="d-flex justify-content-center mb-2">
+                <input class="btn btn-outline-info ms-1 value" type="submit" value="SAVE">
+              </div>
+                <a target="_parent" href="" style="color: #228FAD" class="p">Back </a>
+               </form>
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="col-lg-6" style="color:#203354" >
+
+            <div class="card mb-4">
+
+                <div class="scroll-bg">
+                    <div class="scroll-div">
+                         <div class="scroll-object">
+              <div class="card-body" >
+
+                <div class="row">
+
+                  <div class="col-sm-3">
+
+                    <p class="mb-0"><b>PREVIOUS NOTES </b></p><BR>
+                  </div>
+                      <form method="POST">
+
+
+
+                  <div class="col-sm-9 bg-info rounded py-2 px-3 mb-2 ">
+
+                    <p class=" mb-0 value"></p>
+
+                  </div>
+
+
+                    <br>
+
+                  </form>
+</div>
+                  </div>
+</div>
+                        </div>
+            </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+      </div>
+    </div>
+
+        </div>
+
+      </div>
+
+
+    </div>
+  </section>
+</body>
+</html>
