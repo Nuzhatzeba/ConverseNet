@@ -17,6 +17,8 @@ def login(request):
     return render(request, 'Home/login.html',{})
 def signin(request):
     return render(request,'Home/signin.html',{})
+def chat(request):
+    return render(request,'Home/chat.html')
 
 def dairy(request):
     return render(request,'Home/dairy.html',{})
