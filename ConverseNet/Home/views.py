@@ -19,7 +19,8 @@ def signin(request):
     return render(request,'Home/signin.html',{})
 def chat(request):
     return render(request,'Home/chat.html')
-
+def botchat(request):
+    return render(request,'Home/bot.html')
 def dairy(request):
     return render(request,'Home/dairy.html',{})
 
