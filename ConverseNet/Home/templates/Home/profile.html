@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Welcome to Profile Page</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Secular+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body {
+       margin: 0;
+       padding: 0;
+       height: 650px;
+       width: 100%;
+       background-image: url(https://static.vecteezy.com/system/resources/previews/011/113/809/non_2x/aesthetic-cute-pastel-blue-checkers-abstract-minimal-wallpaper-illustration-perfect-for-wallpaper-backdrop-postcard-background-and-banner-vector.jpg);
+       background-size: cover;
+       background-position: relative;
+       position: relative;
+    }
+.avatar{
+width:200px;
+height:200px;
+}
+.value{
+color : #203354;
+font-weight: bold;
+}
+.p{
+font-weight: bold;
+font-family: 'Secular One', sans-serif;
+}
+</style>
+</head>
+<body >
+<section>
+    <div class="container py-5">
+
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="card mb-4">
+            <div class="card-body text-center">
+              <img src="https://media.tenor.com/5hKPyupKGWMAAAAC/robot-hello.gif" alt="avatar"
+                class="rounded-circle img-fluid" style="width: 150px height=200px;">
+
+              <h5 class="my-3">{{name}}</h5>
+               <form method="POST">
+                {%csrf_token%}
+              <div class="form-group">
+                <p>"Add/Edit Your Bio"</p>
+              <textarea  class="form-control rounded-0" id="exampleFormControlTextarea2" rows="1" name="about_info"></textarea>
+              </div>
+              <div class="d-flex justify-content-center mb-2">
+                <input class="btn btn-outline-info ms-1 value" type="submit" value="Edit Profile" style="color:#dark blue">
+              </div>
+                 <br>
+                <a target="_parent" href="http://127.0.0.1:8000/homepage/{{user_name}}/ResetPassword" style="color:#203354" class="p">Update Your Password </a>
+ <br>
+                 <a target="_parent" href="http://127.0.0.1:8000/homepage/{{user_name}}" style="color: #228FAD" class="p">Back </a>
+               </form>
+            </div>
+             {% include 'Home/flash-msg.html' %}
+          </div>
+
+        </div>
+        <div class="col-lg-8">
+            <div class="card mb-4">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-sm-3">
+                    <p class="mb-0">FULL NAME : </p>
+                  </div>
+                  <div class="col-sm-9">
+                    <p class=" mb-0 value">{{name}}</p>
+                  </div>
+                </div><hr>
+                  <div class="row">
+                  <div class="col-sm-3">
+                    <p class="mb-0">Gender : </p>
+                  </div>
+                  <div class="col-sm-9">
+                    <p class="mb-0 value">{{gender}}</p>
+                  </div>
+                </div>
+                <hr>
+                <div class="row">
+                  <div class="col-sm-3">
+                    <p class="mb-0">EMAIL</p>
+                  </div>
+                  <div class="col-sm-9">
+                    <p class="mb-0 value">{{email}}</p>
+                  </div>
+                </div>
+                <hr>
+                <div class="row">
+                  <div class="col-sm-3">
+                    <p class="mb-0">DATE OF BIRTH : </p>
+                  </div>
+                  <div class="col-sm-9">
+                    <p class=" mb-0 value">{{bod}}</p>
+                  </div>
+                </div>
+                <hr>
+                <div class="row">
+                  <div class="col-sm-3">
+                    <p class="mb-0">BIO : </p>
+                  </div>
+                  <div class="col-sm-9">
+                    <p class=" mb-0 value"> {{bio}}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+
+      </div>
+    </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
+</html>

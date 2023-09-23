@@ -1,0 +1,26 @@
+<head>
+
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js">                                                                                  </script>
+
+</head>
+<script>
+
+   $(document).ready(function(){
+         $(".alert").delay(5000).slideUp(300);
+   });
+
+   </script>
+
+{% for message in messages %}
+<div class="container-fluid p-0">
+ <div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+     <a herf="{% url 'signup'%}">
+       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+       <span aria-hidden="true">×</span>
+     </a>
+   </button>
+   {{ message }}
+ </div>
+</div>
+{% endfor %}

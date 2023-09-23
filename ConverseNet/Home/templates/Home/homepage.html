@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome to Let's Talk homepage</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<style>
+    *{
+  margin:0;
+  padding:0;
+
+}
+
+.container{
+  height:100vh;
+  width:100%;
+  background-image: url(https://pagenorth.co.uk/wp-content/uploads/2023/03/blog-feature-image-bots.jpg);
+  backgroung-size: cover;
+  background-position: relative;
+  position: relative;
+
+}
+
+.navbar{
+ width:100%;
+ margin:auto;
+ padding: 15px 0;
+ background-color:#203354;
+ display: flex;
+ align-items:center;
+ justify-content:space-between;
+}
+    .navbar ul li{
+  list-style:none;
+
+  display:inline-block;
+  margin: 0 15px;
+}
+.navbar ul li a{
+text-decoration:none;
+
+color:#fff;
+font-size:15px;
+}
+.content{
+ width:100%;
+ position:absolute;
+ top:30%;
+}
+
+.left-col{
+ margin-left:6%;
+
+}
+
+.left-col h1{
+ font-size:50px;
+ color:#203354;
+ line-height:150px;
+ position:absolute;
+ right:540px;
+}
+
+
+
+
+</style>
+<body>
+<div class="container">
+
+<div class="navbar">
+    <ul>
+        <li><a href="#">Home</a></li>
+       <li><a  href="botchat">Bot Chat</a></li>
+        <li><a href="diary">Dairy</a></li>
+        <li><a href="profile">Profile</a></li>
+        <li><a href="/loadout/">Log Out</a></li>
+        <li><a href="inbox">search a friend</a></li>
+    </ul>
+
+</div>
+<div class="content">
+<form class='form-inline' method="POST">
+          {% csrf_token%}
+
+
+      </form>
+<div class="left-col">
+       <h1>{% include 'Home/flash-msg.html' %}</h1>
+</div>
+
+</div>
+</div>
+
+
+
+</body>
+</html>
