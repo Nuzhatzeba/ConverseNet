@@ -38,32 +38,42 @@
       <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
         <li><a>Logout</a></li>
       </ul>
-    </div><h3 class="justify-between text-xl font-semibold"> User name</h3>
+    </div><h3 class="justify-between text-xl font-semibold"> {{user_full_name}}</h3>
       </div>
 <!--      navbar finished-->
 
 <!--      chat start-->
       <div class="mt-[100px]">
       <div class="chat chat-start">
-          <div class="chat-bubble">
-            <h3 class=" chat-header text-xl font-bold text-white">Name</h3>
-             I hate you!</div>
-      </div>
-    <div class="chat chat-end">
-      <div class="chat-bubble">
-          <h3 class=" text-xl font-bold text-white">Name</h3>
-          I hate you too!</div>
+    <div class="chat-bubble">
+        <h3 class="chat-header text-xl font-bold text-white">ROBO</h3>
+        <form method="POST">
+            {% csrf_token %}
+            {% for msg in messages %}
+            <div class="bg-primary rounded py-2 px-3 mb-2">
+                <p style="color: black">{{ msg }}</p>
+            </div>
+            <br>
+            {% endfor %}
+        </form>
     </div>
+</div>
+<!--    <div class="chat chat-end">-->
+<!--      <div class="chat-bubble">-->
+<!--&lt;!&ndash;          <h3 class=" text-xl font-bold text-white">{{user_full_name}}</h3>&ndash;&gt;-->
+<!--&lt;!&ndash;          I hate you too!</div>&ndash;&gt;-->
+<!--    </div>-->
+<!--          </div>-->
+          <div class="relative mt-[250px]">
+            <form method="POST">
+                {% csrf_token %}
+                <input type="text" placeholder="Type here" class="input input-bordered input-info h-[60px] w-full mt-[100px]"/>
+                <input class="btn bg-[#032A47] absolute inset-y-0 right-0 h-[60px] px-4 text-white mt-[100px]" type="submit" value="SEND">
+            </form>
           </div>
-
-      <div class="relative mt-[250px]">
-          <input type="text" placeholder="Type here" class="input input-bordered input-info h-[60px] w-full"/>
-          <button class="btn bg-[#032A47] absolute inset-y-0 right-0 h-[60px] px-4 text-white">Send</button>
-      </div>
-
-
-
 </div>
 
 </body>
 </html>
+
+
