@@ -21,10 +21,8 @@ def addfriend_page(request, user_name):
             user = ConverseNetUser.objects.all()
             if user_email != friend_email:
                 if user.filter(email=user_email).exists() and user.filter(email=friend_email).exists():
-                    us1 = User.objects.get(email=user_email)
-                    print(us1.username)
-                    us2 = User.objects.get(email=friend_email)
-                    print(us2.username)
+                    us1 = ConverseNetUser.objects.get(email=user_email)
+                    us2 = ConverseNetUser.objects.get(email=friend_email)
                     fi1 = FriendsThread.objects.filter(friends_User_id_Person1=us1)
                     for fi in fi1:
                         if fi.friends_User_id_Person2 == us2:
@@ -38,7 +36,7 @@ def addfriend_page(request, user_name):
                     if value == 'T':
                         u1 = FriendsThread(friends_User_id_Person1=us1, friends_User_id_Person2=us2)
                         u1.save()
-                        return redirect('homepage', user_name=user.username)
+                        return redirect('homepage', user_name=user_name)
                     else:
                         messages.error(request, 'ALREADY A FRIEND !! ')
                 else:
