@@ -11,10 +11,41 @@ from .models import ConverseNetUser, Profile, Bot_Message, FriendsThread, Reques
 
 
 # from .forms import ClientForm
-def add_friend(request):
-
-    return render(request, 'Home/add_friend.html')
-
+def addfriend_page(request, user_name):
+    if User.objects.filter(username=user_name).exists():
+        user = User.objects.get(username=user_name)
+        user_email = user.email
+        if request.method == 'POST':
+            friend_email = request.POST['friend_email']
+            value = 'T'
+            user = ConverseNetUser.objects.all()
+            if user_email != friend_email:
+                if user.filter(email=user_email).exists() and user.filter(email=friend_email).exists():
+                    us1 = User.objects.get(email=user_email)
+                    print(us1.username)
+                    us2 = User.objects.get(email=friend_email)
+                    print(us2.username)
+                    fi1 = FriendsThread.objects.filter(friends_User_id_Person1=us1)
+                    for fi in fi1:
+                        if fi.friends_User_id_Person2 == us2:
+                            value = 'f'
+                            break
+                    fi1 = FriendsThread.objects.filter(friends_User_id_Person2=us1)
+                    for fi in fi1:
+                        if fi.friends_User_id_Person1 == us2:
+                            value = 'f'
+                            break
+                    if value == 'T':
+                        u1 = FriendsThread(friends_User_id_Person1=us1, friends_User_id_Person2=us2)
+                        u1.save()
+                        return redirect('homepage', user_name=user.username)
+                    else:
+                        messages.error(request, 'ALREADY A FRIEND !! ')
+                else:
+                    messages.error(request, 'THE PERSON DO NOT EXIST!')
+            else:
+                messages.error(request, 'INVALID INPUT!')
+        return render(request, 'Home/addfriend.html', {'user_name': user_name})
 
 
 def login(request):
@@ -26,7 +57,7 @@ def login(request):
             users = User.objects.filter(email=client_email)
             for user in users:
                 if user.password == client_password:
-                    messages.success(request, 'Sucessfully Logged In.')
+                    messages.success(request, 'Successfully Logged In.')
                     return redirect('homepage', user_name=user.username)
                 else:
                     messages.error(request, 'Incorrect Password !! ')
