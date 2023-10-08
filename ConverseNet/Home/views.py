@@ -11,6 +11,10 @@ from .models import ConverseNetUser, Profile, Bot_Message, FriendsThread, Reques
 
 
 # from .forms import ClientForm
+def add_friend(request):
+
+    return render(request, 'Home/add_friend.html')
+
 
 
 def login(request):
@@ -240,3 +244,30 @@ def get_bot_response(message: str, pl: list[str]) -> str:
         bot_response = 'Something went wrong...'
 
     return bot_response
+
+
+def password_reset(request, user_name):
+    user = User.objects.get(username=user_name)
+    username = user.first_name + ' ' + user.last_name
+    if (request.method == 'POST'):
+        password = request.POST['password']
+        if user.password == password:
+            new_password = request.POST['new_password']
+            confirm_password = request.POST['confirm_password']
+            if new_password != '' and confirm_password != '':
+                if new_password == confirm_password:
+                    user.password = new_password
+                    user.save()
+                    client = ConverseNetUser.objects.get(user_ID=user.id)
+                    client.password = new_password
+                    client.save()
+                    messages.success(request, 'Password updated.')
+                    return redirect('profile', user_name=user_name)
+                else:
+                    messages.error(request, 'THE PASSWORDS DOES NOT MATCH !!!...')
+            else:
+                messages.error(request, 'Empty string not allowed as password!!!!')
+        else:
+            messages.error(request, 'WRONG USER PASSWORD ENTERED!!!!')
+
+    return render(request, 'Home/updatepassword.html', {'user_name': username})

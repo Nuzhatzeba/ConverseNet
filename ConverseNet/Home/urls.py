@@ -13,6 +13,7 @@ urlpatterns = [
     path('loadout/', views.loadpage, name='logout'),
     path('homepage/<str:user_name>/profile/', views.profile, name='profile'),
     path('homepage/<str:user_name>/inbox/', views.inbox, name='inbox'),
-
+    path('homepage/<str:user_name>/ResetPassword', views.password_reset, name='password'),
+    path('homepage/<str:user_name>/add_friend', views.add_friend, name='add_friend'),
 
 ]
