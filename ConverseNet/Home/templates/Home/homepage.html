@@ -1,90 +1,124 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <title>Welcome to Let's Talk homepage</title>
     <link rel="stylesheet" href="style.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@3.9.2/dist/full.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
 </head>
+<!--<style>-->
+<!--    *{-->
+<!--  margin:0;-->
+<!--  padding:0;-->
+
+<!--}-->
+
+<!--.container{-->
+<!--  height:100vh;-->
+<!--  width:100%;-->
+<!--  background-image: url(https://pagenorth.co.uk/wp-content/uploads/2023/03/blog-feature-image-bots.jpg);-->
+<!--  backgroung-size: cover;-->
+<!--  background-position: relative;-->
+<!--  position: relative;-->
+
+<!--}-->
+
+<!--.navbar{-->
+<!-- width:100%;-->
+<!-- margin:auto;-->
+<!-- padding: 15px 0;-->
+<!-- background-color:#203354;-->
+<!-- display: flex;-->
+<!-- align-items:center;-->
+<!-- justify-content:space-between;-->
+<!--}-->
+<!--    .navbar ul li{-->
+<!--  list-style:none;-->
+
+<!--  display:inline-block;-->
+<!--  margin: 0 15px;-->
+<!--}-->
+<!--.navbar ul li a{-->
+<!--text-decoration:none;-->
+
+<!--color:#fff;-->
+<!--font-size:15px;-->
+<!--}-->
+<!--.content{-->
+<!-- width:100%;-->
+<!-- position:absolute;-->
+<!-- top:30%;-->
+<!--}-->
+
+<!--.left-col{-->
+<!-- margin-left:6%;-->
+
+<!--}-->
+
+<!--.left-col h1{-->
+<!-- font-size:50px;-->
+<!-- color:#203354;-->
+<!-- line-height:150px;-->
+<!-- position:absolute;-->
+<!-- right:540px;-->
+<!--}-->
+
+
+
+
+<!--</style>-->
 <style>
-    *{
-  margin:0;
-  padding:0;
-
-}
-
-.container{
-  height:100vh;
-  width:100%;
-  background-image: url(https://pagenorth.co.uk/wp-content/uploads/2023/03/blog-feature-image-bots.jpg);
-  backgroung-size: cover;
-  background-position: relative;
-  position: relative;
-
-}
-
-.navbar{
- width:100%;
- margin:auto;
- padding: 15px 0;
- background-color:#203354;
- display: flex;
- align-items:center;
- justify-content:space-between;
-}
-    .navbar ul li{
-  list-style:none;
-
-  display:inline-block;
-  margin: 0 15px;
-}
-.navbar ul li a{
-text-decoration:none;
-
-color:#fff;
-font-size:15px;
-}
-.content{
- width:100%;
- position:absolute;
- top:30%;
-}
-
-.left-col{
- margin-left:6%;
-
-}
-
-.left-col h1{
- font-size:50px;
- color:#203354;
- line-height:150px;
- position:absolute;
- right:540px;
-}
-
-
-
+    .font{
+    font-family: 'Pacifico', cursive;
+    }
 
 </style>
-<body>
-<div class="container">
+<body class="bg-[#689FC7] text-white">
+<div class="" >
+    <div class="navbar">
+  <div class="navbar-start">
+    <div class="dropdown">
+      <label tabindex="0" class="btn btn-ghost lg:hidden">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
+      </label>
+      <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
 
-<div class="navbar">
-    <ul>
-        <li><a href="#">Home</a></li>
-       <li><a  href="botchat">Bot Chat</a></li>
+          <li><a href="#">Home</a></li>
+        <li><a href="chat">Chat</a></li>
+        <li><a  href="botchat">Bot Chat</a></li>
         <li><a href="diary">Dairy</a></li>
         <li><a href="profile">Profile</a></li>
-        <li><a href="/loadout/">Log Out</a></li>
         <li><a href="addfriend">Search a friend</a></li>
-    </ul>
 
+      </ul>
+    </div>
+    <a class="btn btn-ghost normal-case text-3xl font">ConverseNet</a>
+  </div>
+  <div class="navbar-center hidden lg:flex">
+    <ul class="menu menu-horizontal px-1 text-xl">
+
+        <li><a href="#">Home</a></li>
+        <li><a href="chat">Chat</a></li>
+        <li><a  href="botchat">Bot Chat</a></li>
+        <li><a href="diary">Dairy</a></li>
+        <li><a href="profile">Profile</a></li>
+        <li><a href="addfriend">Add Friend</a></li>
+
+    </ul>
+  </div>
+  <div class="navbar-end">
+    <li class="btn"><a href="/loadout/">Log Out</a></li>
+  </div>
 </div>
 <div class="content">
 <form class='form-inline' method="POST">
           {% csrf_token%}
-
-
       </form>
 <div class="left-col">
        <h1>{% include 'Home/flash-msg.html' %}</h1>
