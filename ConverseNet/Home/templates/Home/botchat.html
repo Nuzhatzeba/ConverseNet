@@ -2,7 +2,7 @@
 <html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>BOT Chat</title>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@3.6.2/dist/full.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.tailwindcss.com"></script><!--    daisyUI links-->
     <script src="https://cdn.tailwindcss.com"></script><!--    tailwindcss link-->
@@ -68,7 +68,7 @@
           <div class="relative mt-[250px]">
             <form method="POST">
                 {% csrf_token %}
-                <input type="text" placeholder="Type here" class="input input-bordered input-info h-[60px] w-full mt-[100px]"/>
+                <input name="message"type="text" placeholder="Type here" class="input input-bordered input-info h-[60px] w-full mt-[100px]"/>
                 <input class="btn bg-[#032A47] absolute inset-y-0 right-0 h-[60px] px-4 text-white mt-[100px]" type="submit" value="SEND">
             </form>
           </div>

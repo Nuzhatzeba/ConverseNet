@@ -10,6 +10,39 @@ from django.urls import reverse
 from .models import ConverseNetUser, Profile, Bot_Message, FriendsThread, Requests, FriendsThreadMessage, Diary
 
 
+def getMessages(request, thread_id):
+    friends = FriendsThread.objects.get(id=thread_id)  # thread model
+    message_collection = FriendsThreadMessage.objects.filter(thread_Id=friends.id)  # message model
+    lists_of_message = []
+    for message in message_collection:
+        chat = message.message
+        time = message.friends_Chat_Time.strftime("%m/%d/%Y, %H:%M:%S")
+        sender = ConverseNetUser.objects.get(id=message.sender_Id)
+        sender_name = sender.f_name + " " + sender.l_name
+        history = str(sender_name.upper() + ":" + chat + "       " + time)
+        lists_of_message.append(history)
+    return lists_of_message
+
+
+def inbox_page(request, friend_name, thread_id, user_name):
+    list_of_messages = getMessages(request, thread_id=thread_id)
+    user = User.objects.get(username=user_name)
+    userid = user.id
+    if request.method == 'POST':
+        message = request.POST['message']
+        if message != '':
+            fuser = ConverseNetUser.objects.get(user_ID=userid)
+            friends_thread = FriendsThread.objects.get(id=thread_id)
+            new_message = FriendsThreadMessage(message=message, sender_Id=fuser, thread_Id=friends_thread)
+            new_message.save()
+            list_of_messages = getMessages(request, thread_id=thread_id)
+    return render(request, 'Home/chat.html', {'friend_name': friend_name,
+                                              'user_name': user_name,
+                                              'friends_id': thread_id,
+                                              'messages': list_of_messages,
+                                              'userid': userid})
+
+
 # from .forms import ClientForm
 def addfriend_page(request, user_name):
     if User.objects.filter(username=user_name).exists():
@@ -92,10 +125,6 @@ def signup(request):
     return render(request, 'Home/signup.html')
 
 
-def chat(request, user_name):
-    return render(request, 'Home/chat.html', {'user_name': user_name})
-
-
 def getMessagesRobo(request, user_id):
     lists = []
     if Bot_Message.objects.filter(converseNet_user=user_id).exists():
@@ -104,16 +133,12 @@ def getMessagesRobo(request, user_id):
         for message in msgs:
             user_chat = message.converseNet_user_Message
             reply = message.reply_Message
-            time = message.Message_Time.strftime("%m/%d/%Y, %H:%M:%S")
+            time = message.message_Time.strftime("%m/%d/%Y, %H:%M:%S")
             history1 = str('YOU  :' + user_chat + ', TIME :' + time)
             lists.append(history1)
             history2 = str('BOT  :' + reply + '\n' + ', TIME :' + time)
             lists.append(history2)
     return lists
-
-
-def inbox(request, user_name):
-    pass
 
 
 def botchat(request, user_name):
@@ -130,7 +155,7 @@ def botchat(request, user_name):
         if message != '':
             response: str = get_bot_response(message, prompt_list)
             new_msg = Bot_Message(converseNet_user_Message=message, reply_Message=response,
-                                  converseNet_user=client_id)
+                                  converseNet_user=client)
             new_msg.save()
             # get the previous messages from record
             lists = getMessagesRobo(request, user_id=client_id)
@@ -186,6 +211,37 @@ def loadpage(request):
 
 
 def homepage(request, user_name):
+    if request.method == 'POST':
+        friend_email = request.POST['email']
+        cuser = User.objects.get(username=user_name)
+        user = ConverseNetUser.objects.get(user_ID=cuser.id)
+
+        if User.objects.filter(email=friend_email).exists():  # if that user exists
+            cfriend_user = User.objects.get(email=friend_email)
+            friend_user=ConverseNetUser.objects.get(user_ID=cfriend_user.id)
+            flag = 0
+            if user is not None and friend_user is not None:
+                friendship_thread_of_user_where_user_is_person_1 = FriendsThread.objects.filter(
+                    friends_User_id_Person1=user)
+                for thread in friendship_thread_of_user_where_user_is_person_1:
+                    if thread.friends_User_id_Person2 == friend_user:
+                        flag = 1
+                        thread_id = thread.id
+                        break
+                friendship_thread_of_user_where_user_is_person_2 = FriendsThread.objects.filter(
+                    friends_User_id_Person2=user)
+                for thread in friendship_thread_of_user_where_user_is_person_2:
+                    if thread.friends_User_id_Person1 == friend_user:
+                        thread_id = thread.id
+                        flag = 1
+                        break
+                if flag == 1:
+                    return redirect('inbox', friend_name=cfriend_user.first_name + ' ' + friend_user.last_name,
+                                    thread_id=thread_id, user_name=cuser.username)
+                else:
+                    messages.error(request, 'you are not friends with this person !! ')
+        else:
+            messages.error(request, 'NO SUCH PERSON EXISTS !!')
     return render(request, 'Home/homepage.html', {'user_name': user_name, })
 
 
