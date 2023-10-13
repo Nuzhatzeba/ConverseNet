@@ -39,32 +39,27 @@
         <li><a target="_parent" ><button id="back">Home</button></a></li>
         <li><a>Logout</a></li>
       </ul>
-    </div><h3 class="justify-between text-xl font-semibold"> User name</h3>
+    </div><h3 class="justify-between text-xl font-semibold">{{friend_name}}</h3>
       </div>
 <!--      navbar finished-->
 
 <!--      chat start-->
+
       <div class="mt-[100px]">
+          <form method="POST">
+                {%csrf_token%}
       <div class="chat chat-start">
+          {% for msg in messages %}
           <div class="chat-bubble">
             <h3 class=" chat-header text-xl font-bold text-white">Name</h3>
-             I hate you!</div>
-      </div>
-    <div class="chat chat-end">
-      <div class="chat-bubble">
-          <h3 class=" text-xl font-bold text-white">Name</h3>
-          I hate you too!</div>
-    </div>
-          </div>
-
+             {{msg}}</div>
+                    </div>
+               {% endfor %}
+          </form>
       <div class="relative mt-[250px]">
           <input type="text" placeholder="Type here" class="input input-bordered input-info h-[60px] w-full"/>
           <button class="btn bg-[#032A47] absolute inset-y-0 right-0 h-[60px] px-4 text-white">Send</button>
       </div>
-
-
-
 </div>
-
 </body>
 </html>
