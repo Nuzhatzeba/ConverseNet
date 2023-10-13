@@ -19,47 +19,47 @@
 <body>
 <div class="flex w-full">
     {% load static %}
-  <div class="grid h-20 flex-grow card  rounded-box place-items-center">
-      <div class="h-[250px] w-[250px] flex justify-center items-center mt-[100px]">
-         <img src="{% static 'image 2.png' %}" alt="" srcset="">
-      </div>
-
-  </div>
-
-  <div class="grid h-[570px] w-[400px] flex-grow card rounded-box" style="background-color: #f0f0f0; background-image: url('{% static 'Chats.png' %}');">
-<!--      navbar start-->
-      <div class="navbar bg-base-100">
-          <div class="dropdown dropdown-end">
-      <label tabindex="0" class="btn btn-ghost btn-circle avatar">
-        <div class="w-10 rounded-full">
-          <img src="{% static 'profile-user.png' %}" />
+    <div class="grid h-20 flex-grow card  rounded-box place-items-center">
+        <div class="h-[250px] w-[250px] flex justify-center items-center mt-[100px]">
+            <img src="{% static 'image 2.png' %}" alt="" srcset="">
         </div>
-      </label>
-      <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-        <li><a target="_parent" ><button id="back">Home</button></a></li>
-        <li><a>Logout</a></li>
-      </ul>
-    </div><h3 class="justify-between text-xl font-semibold">{{friend_name}}</h3>
-      </div>
+    </div>
+    <div class="grid h-[570px] w-[400px] flex-grow card rounded-box" style="background-color: #f0f0f0; background-image: url('{% static 'Chats.png' %}');">
+<!--      navbar start-->
+        <div class="navbar bg-base-100">
+            <div class="dropdown dropdown-end">
+                <label tabindex="0" class="btn btn-ghost btn-circle avatar">
+                    <div class="w-10 rounded-full">
+                        <img src="{% static 'profile-user.png' %}" />
+                    </div>
+                </label>
+                <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                    <li><a target="_parent" ><button id="back">Home</button></a></li>
+                    <li><a>Logout</a></li>
+                </ul>
+            </div><h3 class="justify-between text-xl font-semibold">{{friend_name}}</h3>
+        </div>
 <!--      navbar finished-->
 
 <!--      chat start-->
-
-      <div class="mt-[100px]">
-          <form method="POST">
+        <div class="mt-[100px]">
+            <form method="POST">
                 {%csrf_token%}
-      <div class="chat chat-start">
-          {% for msg in messages %}
-          <div class="chat-bubble">
-            <h3 class=" chat-header text-xl font-bold text-white">Name</h3>
-             {{msg}}</div>
+                <div class="chat chat-start">
+                    {% for msg in messages %}
+                    <div class="chat-bubble">
+                        <h3 class=" chat-header text-xl font-bold text-white">Name</h3>
+                        {{msg}}
                     </div>
-               {% endfor %}
-          </form>
-      <div class="relative mt-[250px]">
-          <input type="text" placeholder="Type here" class="input input-bordered input-info h-[60px] w-full"/>
-          <button class="btn bg-[#032A47] absolute inset-y-0 right-0 h-[60px] px-4 text-white">Send</button>
-      </div>
-</div>
+                    {% endfor %}
+                </div>
+                <div class="relative mt-[250px]">
+                    <input name="message" type="text" placeholder="Type here" class="input input-bordered input-info h-[60px] w-full"/>
+                    <input class="btn bg-[#032A47] absolute inset-y-0 right-0 h-[60px] px-4 text-white mt-[100px]" type="submit" value="SEND">
+                </div>
+            </form>
+        </div>
+    </div>
+    </div>
 </body>
 </html>
