@@ -36,9 +36,10 @@
         </div>
       </label>
       <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-        <li><a>Logout</a></li>
+            <li><a target="_parent" href="http://127.0.0.1:8000/homepage/{{user_name}}" ><button id="back">Home</button></a></li>
+            <li><a href="/loadout/">Logout</a></li>
       </ul>
-    </div><h3 class="justify-between text-xl font-semibold"> {{user_full_name}}</h3>
+        </div><h3 class="justify-between text-xl font-semibold"> {{user_full_name}}</h3>
       </div>
 <!--      navbar finished-->
 
@@ -75,5 +76,6 @@
 
 </body>
 </html>
+
 
 

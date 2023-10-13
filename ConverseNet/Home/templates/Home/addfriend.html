@@ -67,10 +67,29 @@
 <!--}-->
 
 <!-- </style>-->
+<style>
+    .font{
+    font-family: 'Pacifico', cursive;
+    }
 
+</style>
 </head>
 <body>
-<div class="flex w-full">
+<div class="navbar bg-[#689FC7] text-white font-bold text-2xl">
+  <div class="flex-1">
+     <a class="btn btn-ghost text-3xl font font-bold">ConverseNet</a>
+  </div>
+  <div class="flex">
+    <ul class=" flex gap-2 px-1">
+      <li><a class="btn font-bold" target="_parent" href="http://127.0.0.1:8000/homepage/{{user_name}}">Home</a></li>
+        <li><a class="btn font-bold" href="/loadout/">Log-out</a></li>
+    </ul>
+  </div>
+</div>
+
+<div class="flex ">
+
+
   <div class="grid h-[600px] flex-grow card bg-base-300 place-items-center">
 
       <div class="card w-96 bg-base-100 shadow-xl p-9 mt-10">

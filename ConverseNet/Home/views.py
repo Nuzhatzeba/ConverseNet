@@ -92,8 +92,8 @@ def signup(request):
     return render(request, 'Home/signup.html')
 
 
-def chat(request):
-    return render(request, 'Home/chat.html')
+def chat(request, user_name):
+    return render(request, 'Home/chat.html', {'user_name': user_name})
 
 
 def getMessagesRobo(request, user_id):
