@@ -7,6 +7,14 @@
     <script src="https://cdn.tailwindcss.com"></script><!--    daisyUI links-->
     <script src="https://cdn.tailwindcss.com"></script><!--    tailwindcss link-->
     <style>
+    .user-message {
+    background-color: #A5D9FF; /* Define a style for user messages */
+    max-width: 600px;
+    }
+    .bot-message {
+        background-color: #E8E8E8; /* Define a style for bot messages */
+        max-width: 500px;
+    }
         .navbar {
             position: absolute;
             top: 0;
@@ -44,20 +52,43 @@
 <!--      navbar finished-->
 
 <!--      chat start-->
-      <div class="mt-[100px]">
-      <div class="chat chat-start">
-    <div class="chat-bubble">
-        <h3 class="chat-header text-xl font-bold text-white">ROBO</h3>
-        <form method="POST">
-            {% csrf_token %}
-            {% for msg in messages %}
-            <div class="bg-primary rounded py-2 px-3 mb-2">
-                <p style="color: black">{{ msg }}</p>
+      <div class="chat-container h-[550px]" style="overflow-y: auto;">
+      <div class="chat h-auto ">
+          {% for message in messages %}
+        <div class="chat mt-[100px]">
+        <div class="">
+            <h3 class="chat-header text-xl font-bold text-white mx-[20px]">
+                {% if message.sender == 'user' %}
+                YOU
+                {% else %}
+                ROBO
+                {% endif %}
+            </h3>
+            <div class="max-w-4/5 mx-[20px]">
+                <p class="rounded text-center {% if message.sender == 'user' %}
+                user-message
+                {% else %}
+                bot-message
+                {% endif %}" style="color: black max-width: 80%; word-wrap: break-word;">{{ message.text }}</p>
+                <time class="text-xs font-bold">{{message.time}} </time>
             </div>
             <br>
-            {% endfor %}
-        </form>
+        </div>
     </div>
+{% endfor %}
+
+<!--        <div class="chat-bubble">-->
+<!--        <h3 class="chat-header text-xl font-bold text-white">ROBO</h3>-->
+<!--        <form method="POST">-->
+<!--            {% csrf_token %}-->
+<!--            {% for msg in messages %}-->
+<!--            <div class="bg-primary rounded py-2 px-3 mb-2">-->
+<!--                <p style="color: black">{{ msg }}</p>-->
+<!--            </div>-->
+<!--            <br>-->
+<!--            {% endfor %}-->
+<!--        </form>-->
+<!--    </div>-->
 </div>
 <!--    <div class="chat chat-end">-->
 <!--      <div class="chat-bubble">-->
@@ -65,14 +96,14 @@
 <!--&lt;!&ndash;          I hate you too!</div>&ndash;&gt;-->
 <!--    </div>-->
 <!--          </div>-->
-          <div class="relative mt-[250px]">
+</div>
+      <div class="fixed mt-[400px]">
             <form method="POST">
                 {% csrf_token %}
-                <input name="message"type="text" placeholder="Type here" class="input input-bordered input-info h-[60px] w-full mt-[100px]"/>
+                <input name="message"type="text" placeholder="Type here" class="input input-bordered input-info h-[60px] w-[650px] mt-[100px]"/>
                 <input class="btn bg-[#032A47] absolute inset-y-0 right-0 h-[60px] px-4 text-white mt-[100px]" type="submit" value="SEND">
             </form>
           </div>
-</div>
 
 </body>
 </html>
