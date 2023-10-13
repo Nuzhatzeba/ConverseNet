@@ -125,21 +125,43 @@ def signup(request):
     return render(request, 'Home/signup.html')
 
 
+# def getMessagesRobo(request, user_id):
+#     lists = []
+#     if Bot_Message.objects.filter(converseNet_user=user_id).exists():
+#         msgs = Bot_Message.objects.filter(converseNet_user=user_id)
+#         lists = []
+#         for message in msgs:
+#             user_chat = message.converseNet_user_Message
+#             reply = message.reply_Message
+#             time = message.message_Time.strftime("%m/%d/%Y, %H:%M:%S")
+#             history1 = str('YOU  :' + user_chat + ', TIME :' + time)
+#             lists.append(history1)
+#             history2 = str('BOT  :' + reply + '\n' + ', TIME :' + time)
+#             lists.append(history2)
+#     return lists
+
 def getMessagesRobo(request, user_id):
-    lists = []
+    messages = []
     if Bot_Message.objects.filter(converseNet_user=user_id).exists():
         msgs = Bot_Message.objects.filter(converseNet_user=user_id)
-        lists = []
         for message in msgs:
             user_chat = message.converseNet_user_Message
             reply = message.reply_Message
             time = message.message_Time.strftime("%m/%d/%Y, %H:%M:%S")
-            history1 = str('YOU  :' + user_chat + ', TIME :' + time)
-            lists.append(history1)
-            history2 = str('BOT  :' + reply + '\n' + ', TIME :' + time)
-            lists.append(history2)
-    return lists
 
+            user_message = {
+                'text': user_chat,
+                'sender': 'user',
+                'time': time,
+            }
+            bot_message = {
+                'text': reply,
+                'sender': 'bot',
+                'time': time,
+            }
+            messages.append(user_message)
+            messages.append(bot_message)
+    return messages
 
 def botchat(request, user_name):
     user = User.objects.get(username=user_name)

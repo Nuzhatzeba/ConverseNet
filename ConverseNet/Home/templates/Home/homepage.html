@@ -77,20 +77,77 @@
     .font{
     font-family: 'Pacifico', cursive;
     }
+   .input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  padding: 18px 16px;
+  background-color: #fff;
+  cursor: pointer;
+  transition: all .5s ease-in-out;
+}
+
+.input::placeholder {
+  color: transparent;
+}
+
+.input:focus::placeholder {
+  color: rgb(131, 128, 128);
+}
+
+.input:focus,.input:not(:placeholder-shown) {
+  background-color: ;
+  border: 1px solid rgb(98, 0, 255);
+  width: 290px;
+  cursor: none;
+  padding: 18px 16px 18px 40px;
+}
+
+
+ .icon {
+    position: absolute;
+    left: 10px;
+    top: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    z-index: -1;
+    fill: #fff;
+}
+
+.input:hover + .icon {
+  transform: rotate(360deg);
+  transition: .2s ease-in-out;
+}
+
+.input:focus + .icon,.input:not(:placeholder-shown) + .icon {
+  z-index: 0;
+  background-color: #689FC7;
+  border: none;
+}
 
 </style>
-<body class="bg-[#689FC7] text-white">
+<body class="bg-[#689FC7] ">
 <div class="" >
-    <div class="navbar">
+    <div class="navbar text-white">
   <div class="navbar-start">
     <div class="dropdown">
       <label tabindex="0" class="btn btn-ghost lg:hidden">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
+        <svg xmlns="http://www.w3.org/2000/svg"
+             class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="white">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
       </label>
       <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
 
           <li><a href="#">Home</a></li>
-        <li><a href="inbox">Inbox</a></li>
         <li><a  href="botchat">Bot Chat</a></li>
         <li><a href="diary">Dairy</a></li>
         <li><a href="profile">Profile</a></li>
@@ -104,23 +161,14 @@
     <ul class="menu menu-horizontal px-1 text-xl">
 
         <li><a href="#">Home</a></li>
-        <li><a href="inbox">Inbox</a></li>
         <li><a  href="botchat">Bot Chat</a></li>
         <li><a href="diary">Dairy</a></li>
         <li><a href="profile">Profile</a></li>
         <li><a href="addfriend">Add Friend</a></li>
 
-    </ul>
-  </div>
-  <div class="navbar-end">
-    <li class="btn"><a href="/loadout/">Log Out</a></li>
-  </div>
-</div>
-</div>
-
-<div class="container">
-    <div id="content">
-      <form class='form-inline' method="POST">
+         <li><div class="container">
+       <div id="content">
+         <form class='form-inline' method="POST">
           {% csrf_token%}
         <div class="input-group">
           <input type='text' name='email' id='search' class="form-control search-form" placeholder="Search a Friend">
@@ -132,9 +180,18 @@
         </div>
           {% include 'Home/flash-msg.html' %}
       </form>
+        </div></li>
+</div>
 
+    </ul>
+  </div>
+  <div class="navbar-end">
+    <li class="btn"><a href="/loadout/">Log Out</a></li>
   </div>
 </div>
+</div>
+
+
 
 </body>
 </html>
