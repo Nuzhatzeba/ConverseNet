@@ -13,6 +13,7 @@ urlpatterns = [
     path('loadout/', views.loadpage, name='logout'),
     path('homepage/<str:user_name>/profile/', views.profile, name='profile'),
     path('homepage/<str:user_name>/<str:friend_name>/<str:thread_id>/inbox/', views.inbox_page, name='inbox'),
+    path('getMessages/<str:thread_id>/', views.getMessages, name='getMessages'),
     path('homepage/<str:user_name>/ResetPassword', views.password_reset, name='password'),
     path('homepage/<str:user_name>/addfriend/', views.addfriend_page, name='addfriend'),
 

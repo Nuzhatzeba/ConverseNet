@@ -1,7 +1,9 @@
+from datetime import datetime
+
 import openai as openai
 from django.shortcuts import render
 from django.contrib.auth.models import User
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.urls import reverse
@@ -13,34 +15,20 @@ from .models import ConverseNetUser, Profile, Bot_Message, FriendsThread, Reques
 # def getMessages(request, thread_id):
 #     friends = FriendsThread.objects.get(id=thread_id)  # thread model
 #     message_collection = FriendsThreadMessage.objects.filter(thread_Id=friends.id)  # message model
-#     lists_of_message = []
+#     messages = []
 #     for message in message_collection:
 #         chat = message.message
 #         time = message.friends_Chat_Time.strftime("%m/%d/%Y, %H:%M:%S")
 #         sender = ConverseNetUser.objects.get(id=message.sender_Id.id)
 #         sender_name = sender.first_name + " " + sender.last_name
-#         history = str(sender_name.upper() + ":" + chat + "       " + time)
-#         lists_of_message.append(history)
-#     return lists_of_message
-
-def getMessages(request, thread_id):
-    friends = FriendsThread.objects.get(id=thread_id)  # thread model
-    message_collection = FriendsThreadMessage.objects.filter(thread_Id=friends.id)  # message model
-    messages = []
-    for message in message_collection:
-        chat = message.message
-        time = message.friends_Chat_Time.strftime("%m/%d/%Y, %H:%M:%S")
-        sender = ConverseNetUser.objects.get(id=message.sender_Id.id)
-        sender_name = sender.first_name + " " + sender.last_name
-        is_user_message = sender.id == request.user.id  # Check if the sender is the current user
-        messages.append({
-            "text": chat,
-            "sender_name": sender_name,
-            "is_user_message": is_user_message,
-            "time": time,
-        })
-    return messages
-
+#         is_user_message = sender.id == request.user.id  # Check if the sender is the current user
+#         messages.append({
+#             "text": chat,
+#             "sender_name": sender_name,
+#             "is_user_message": is_user_message,
+#             "time": time,
+#         })
+#     return messages
 
 
 def botchat(request, user_name):
@@ -69,12 +57,38 @@ def botchat(request, user_name):
                                                  'messages': lists})
 
 
+def getMessages(request, thread_id):
+    # Original list
+    messages = FriendsThreadMessage.objects.filter(thread_Id=thread_id)
+    list1=list(messages.values())
+    # Create a new list with sender_name
+    new_list = []
+    for item in list1:
+        sender_id = item['sender_Id_id']
+        sender = ConverseNetUser.objects.get(id=sender_id)
+        sender_name = sender.first_name + " " + sender.last_name
+        item['sender_name'] = sender_name
+        item.pop('sender_Id_id')  # Remove the old key
+        new_list.append(item)
+    # Print the new list
+    # print(new_list)
+    # for key in list1:
+    #     print(list1[key])
+    # messages=FriendsThreadMessage.objects.filter(thread_Id=thread_id)
+    # print("here'''''''''''''')")
+    print(list(messages.values()))
+    return JsonResponse({"messages": new_list})
+
+
 def inbox_page(request, friend_name, thread_id, user_name):
     list_of_messages = getMessages(request, thread_id=thread_id)
     user = User.objects.get(username=user_name)
     userid = user.id
     if request.method == 'POST':
         message = request.POST['message']
+        # room_details = Room.objects.get(name=room)
+        # messages = Message.objects.filter(room=room_details.id)
+        # return JsonResponse({"messages": list(messages.values())})
         if message != '':
             fuser = ConverseNetUser.objects.get(user_ID=userid)
             friends_thread = FriendsThread.objects.get(id=thread_id)
@@ -92,7 +106,33 @@ def inbox_page(request, friend_name, thread_id, user_name):
                                               'userid': userid})
 
 
-# from .forms import ClientForm
+# def inbox_page(request, friend_name, thread_id, user_name):
+#     list_of_messages = getMessages(request, thread_id=thread_id)
+#     user = User.objects.get(username=user_name)
+#     userid = user.id
+#     if request.method == 'POST':
+#         message = request.POST['message']
+#         # room_details = Room.objects.get(name=room)
+#         # messages = Message.objects.filter(room=room_details.id)
+#         # return JsonResponse({"messages": list(messages.values())})
+#         messages = FriendsThreadMessage.objects.filter(thread_ID=thread_id)
+#         return JsonResponse({"messages": list(messages.values())})
+#         if message != '':
+#             fuser = ConverseNetUser.objects.get(user_ID=userid)
+#             friends_thread = FriendsThread.objects.get(id=thread_id)
+#             new_message = FriendsThreadMessage(message=message, sender_Id=fuser, thread_Id=friends_thread)
+#             new_message.save()
+#             list_of_messages = getMessages(request, thread_id=thread_id)
+#             return HttpResponseRedirect(reverse('inbox', kwargs={
+#                 'friend_name': friend_name,
+#                 'thread_id': thread_id,
+#                 'user_name': user_name}))
+#     return render(request, 'Home/chat.html', {'friend_name': friend_name,
+#                                               'user_name': user_name,
+#                                               'thread_id': thread_id,
+#                                               'messages': list_of_messages,
+#                                               'userid': userid})
+
 def addfriend_page(request, user_name):
     if User.objects.filter(username=user_name).exists():
         user = User.objects.get(username=user_name)

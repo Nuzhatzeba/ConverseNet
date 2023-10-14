@@ -1,3 +1,257 @@
+<!--&lt;!&ndash;<!DOCTYPE html>&ndash;&gt;-->
+<!--&lt;!&ndash;<html lang="en" data-theme="light">&ndash;&gt;-->
+<!--&lt;!&ndash;<head>&ndash;&gt;-->
+<!--&lt;!&ndash;    <meta charset="UTF-8">&ndash;&gt;-->
+<!--&lt;!&ndash;    <title>Title</title>&ndash;&gt;-->
+<!--&lt;!&ndash;    <link href="https://cdn.jsdelivr.net/npm/daisyui@3.6.2/dist/full.css" rel="stylesheet" type="text/css" />&ndash;&gt;-->
+<!--&lt;!&ndash;    <script src="https://cdn.tailwindcss.com"></script>&lt;!&ndash;    daisyUI links&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;    <script src="https://cdn.tailwindcss.com"></script>&lt;!&ndash;    tailwindcss link&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;    <style>&ndash;&gt;-->
+<!--&lt;!&ndash;        .navbar {&ndash;&gt;-->
+<!--&lt;!&ndash;            position: absolute;&ndash;&gt;-->
+<!--&lt;!&ndash;            top: 0;&ndash;&gt;-->
+<!--&lt;!&ndash;            left: 0;&ndash;&gt;-->
+<!--&lt;!&ndash;            right: 0;&ndash;&gt;-->
+<!--&lt;!&ndash;            z-index: 1;&ndash;&gt;-->
+<!--&lt;!&ndash;        }&ndash;&gt;-->
+<!--&lt;!&ndash;        .chat-bubble {&ndash;&gt;-->
+<!--&lt;!&ndash;        margin-bottom: 10px;&ndash;&gt;-->
+<!--&lt;!&ndash;        padding: 10px;&ndash;&gt;-->
+<!--&lt;!&ndash;        max-width: 80%;&ndash;&gt;-->
+<!--&lt;!&ndash;        word-wrap: break-word;&ndash;&gt;-->
+<!--&lt;!&ndash;        }&ndash;&gt;-->
+
+<!--&lt;!&ndash;       .chat-container {&ndash;&gt;-->
+<!--&lt;!&ndash;         max-height: 600px;&ndash;&gt;-->
+<!--&lt;!&ndash;        overflow-y: auto;&ndash;&gt;-->
+<!--&lt;!&ndash;        margin-bottom: 80px;&ndash;&gt;-->
+<!--&lt;!&ndash;        }&ndash;&gt;-->
+
+<!--&lt;!&ndash;    </style>&ndash;&gt;-->
+<!--&lt;!&ndash;</head>&ndash;&gt;-->
+<!--&lt;!&ndash;<body>&ndash;&gt;-->
+<!--&lt;!&ndash;<div class="flex w-full">&ndash;&gt;-->
+<!--&lt;!&ndash;    {% load static %}&ndash;&gt;-->
+<!--&lt;!&ndash;    <div class="grid h-20 flex-grow card  rounded-box place-items-center">&ndash;&gt;-->
+<!--&lt;!&ndash;        <div class="h-[250px] w-[250px] flex justify-center items-center mt-[100px]">&ndash;&gt;-->
+<!--&lt;!&ndash;            <img src="{% static 'image 2.png' %}" alt="" srcset="">&ndash;&gt;-->
+<!--&lt;!&ndash;        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;    <div class="grid h-[570px] w-[400px] flex-grow card rounded-box" style="background-color: #f0f0f0; background-image: url('{% static 'Chats.png' %}');">&ndash;&gt;-->
+
+<!--&lt;!&ndash;        <div class="navbar bg-base-100">&ndash;&gt;-->
+<!--&lt;!&ndash;            <div class="dropdown dropdown-end">&ndash;&gt;-->
+<!--&lt;!&ndash;                <label tabindex="0" class="btn btn-ghost btn-circle avatar">&ndash;&gt;-->
+<!--&lt;!&ndash;                    <div class="w-10 rounded-full">&ndash;&gt;-->
+<!--&lt;!&ndash;                        <img src="{% static 'profile-user.png' %}" />&ndash;&gt;-->
+<!--&lt;!&ndash;                    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                </label>&ndash;&gt;-->
+<!--&lt;!&ndash;                <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">&ndash;&gt;-->
+<!--&lt;!&ndash;                <li><a target="_parent" href="http://127.0.0.1:8000/homepage/{{user_name}}" ><button id="back">Home</button></a></li>&ndash;&gt;-->
+<!--&lt;!&ndash;                <li><a href="/loadout/">Logout</a></li>&ndash;&gt;-->
+<!--&lt;!&ndash;                </ul>&ndash;&gt;-->
+<!--&lt;!&ndash;            </div><h3 class="justify-between text-xl font-semibold">{{friend_name}}</h3>&ndash;&gt;-->
+<!--&lt;!&ndash;        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;        <div class="mt-[100px] chat-container">&ndash;&gt;-->
+<!--&lt;!&ndash;        <form method="POST">&ndash;&gt;-->
+<!--&lt;!&ndash;        {% csrf_token %}&ndash;&gt;-->
+<!--&lt;!&ndash;        <div class="chat chat-start">&ndash;&gt;-->
+<!--&lt;!&ndash;            {% for message in messages %}&ndash;&gt;-->
+<!--&lt;!&ndash;            <div class="chat-bubble">&ndash;&gt;-->
+<!--&lt;!&ndash;                <h3 class="chat-header text-xl font-bold text-white">{{ message.sender_name }}</h3>&ndash;&gt;-->
+<!--&lt;!&ndash;                {{ message.text }}<br><time class="text-xs font-bold">{{message.time}} </time>&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+
+<!--&lt;!&ndash;            {% endfor %}&ndash;&gt;-->
+<!--&lt;!&ndash;        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;    </form>&ndash;&gt;-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+<!--&lt;!&ndash;        <div class="fixed mt-[400px]">&ndash;&gt;-->
+<!--&lt;!&ndash;            <form method="POST">&ndash;&gt;-->
+<!--&lt;!&ndash;                {% csrf_token %}&ndash;&gt;-->
+<!--&lt;!&ndash;                <input name="message"type="text" placeholder="Type here" class="input input-bordered input-info h-[60px] w-[700px] mt-[100px]"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                <input class="btn bg-[#032A47] absolute inset-y-0 right-0 h-[60px] px-4 text-white mt-[100px]" type="submit" value="SEND">&ndash;&gt;-->
+<!--&lt;!&ndash;            </form>&ndash;&gt;-->
+<!--&lt;!&ndash;          </div>&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;<script>&ndash;&gt;-->
+<!--&lt;!&ndash;    function showPopup() {&ndash;&gt;-->
+<!--&lt;!&ndash;        var popup = document.getElementById("popup");&ndash;&gt;-->
+<!--&lt;!&ndash;        popup.style.display = "block";&ndash;&gt;-->
+<!--&lt;!&ndash;    }&ndash;&gt;-->
+<!--&lt;!&ndash;    setTimeout(showPopup,10000); // 10,000 milliseconds = 10 seconds&ndash;&gt;-->
+<!--&lt;!&ndash;    document.getElementById("showPopup").addEventListener("click", function () {&ndash;&gt;-->
+<!--&lt;!&ndash;        document.getElementById("popupMessage").style.display = "none";&ndash;&gt;-->
+<!--&lt;!&ndash;    });&ndash;&gt;-->
+<!--&lt;!&ndash;</script>&ndash;&gt;-->
+<!--&lt;!&ndash;<div class="rounded" id="popup"&ndash;&gt;-->
+<!--&lt;!&ndash;     style="display: none; position:&ndash;&gt;-->
+<!--&lt;!&ndash;     fixed; top: 50%; left: 50%;&ndash;&gt;-->
+<!--&lt;!&ndash;     transform: translate(-50%, -50%);&ndash;&gt;-->
+<!--&lt;!&ndash;     padding: 20px;&ndash;&gt;-->
+<!--&lt;!&ndash;     background-color: #fff;&ndash;&gt;-->
+<!--&lt;!&ndash;     border: 1px solid #ccc;&ndash;&gt;-->
+<!--&lt;!&ndash;     box-shadow: 2px 2px 5px #999;&ndash;&gt;-->
+<!--&lt;!&ndash;     z-index: 1000;">&ndash;&gt;-->
+<!--&lt;!&ndash;    <div class="w-12 rounded-full flex">&ndash;&gt;-->
+<!--&lt;!&ndash;          <img src="{% static 'bot.png' %}" />&ndash;&gt;-->
+<!--&lt;!&ndash;    </div><h1>Hey!!</h1>&ndash;&gt;-->
+<!--&lt;!&ndash;    <div class="flex">&ndash;&gt;-->
+
+<!--&lt;!&ndash;        <p>Getting bored? Let's talk!</p>&ndash;&gt;-->
+<!--&lt;!&ndash;        <a href="http://127.0.0.1:8000/homepage/{{user_name}}/botchat/">&ndash;&gt;-->
+<!--&lt;!&ndash;            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">&ndash;&gt;-->
+<!--&lt;!&ndash;            <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 01-.825-.242m9.345-8.334a2.126 2.126 0 00-.476-.095 48.64 48.64 0 00-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0011.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155" />&ndash;&gt;-->
+<!--&lt;!&ndash;            </svg>&ndash;&gt;-->
+<!--&lt;!&ndash;        </a>&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;</body>&ndash;&gt;-->
+<!--&lt;!&ndash;</html>&ndash;&gt;-->
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" data-theme="light">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Title</title>-->
+<!--    <link href="https://cdn.jsdelivr.net/npm/daisyui@3.6.2/dist/full.css" rel="stylesheet" type="text/css" />-->
+<!--    <script src="https://cdn.tailwindcss.com"></script>&lt;!&ndash;    daisyUI links&ndash;&gt;-->
+<!--    <script src="https://cdn.tailwindcss.com"></script>&lt;!&ndash;    tailwindcss link&ndash;&gt;-->
+<!--    <script   src="https://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>-->
+<!--    <style>-->
+<!--        .navbar {-->
+<!--            position: absolute;-->
+<!--            top: 0;-->
+<!--            left: 0;-->
+<!--            right: 0;-->
+<!--            z-index: 1;-->
+<!--        }-->
+<!--        .chat-bubble {-->
+<!--        margin-bottom: 10px;-->
+<!--        padding: 10px;-->
+<!--        max-width: 80%;-->
+<!--        word-wrap: break-word;-->
+<!--        }-->
+
+<!--       .chat-container {-->
+<!--         max-height: 600px;-->
+<!--        overflow-y: auto;-->
+<!--        margin-bottom: 80px;-->
+<!--        }-->
+
+<!--    </style>-->
+<!--</head>-->
+<!--<body>-->
+<!--<div class="flex w-full">-->
+<!--    {% load static %}-->
+<!--    <div class="grid h-20 flex-grow card  rounded-box place-items-center">-->
+<!--        <div class="h-[250px] w-[250px] flex justify-center items-center mt-[100px]">-->
+<!--            <img src="{% static 'image 2.png' %}" alt="" srcset="">-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class="grid h-[570px] w-[400px] flex-grow card rounded-box" style="background-color: #f0f0f0; background-image: url('{% static 'Chats.png' %}');">-->
+
+<!--        <div class="navbar bg-base-100">-->
+<!--            <div class="dropdown dropdown-end">-->
+<!--                <label tabindex="0" class="btn btn-ghost btn-circle avatar">-->
+<!--                    <div class="w-10 rounded-full">-->
+<!--                        <img src="{% static 'profile-user.png' %}" />-->
+<!--                    </div>-->
+<!--                </label>-->
+<!--                <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">-->
+<!--                <li><a target="_parent" href="http://127.0.0.1:8000/homepage/{{user_name}}" ><button id="back">Home</button></a></li>-->
+<!--                <li><a href="/loadout/">Logout</a></li>-->
+<!--                </ul>-->
+<!--            </div><h3 class="justify-between text-xl font-semibold">{{friend_name}}</h3>-->
+<!--        </div>-->
+<!--        <div class="mt-[100px] chat-container">-->
+<!--            <div class="mt-[100px] chat-container">-->
+<!--                <div class="chat chat-start">-->
+<!--                    <div class="chat-bubble">-->
+<!--                        <div id="display">-->
+
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--&lt;!&ndash;            <div id="display">&ndash;&gt;-->
+<!--&lt;!&ndash;                &lt;!&ndash; <div class="container darker">&ndash;&gt;-->
+<!--&lt;!&ndash;                  <b>Tom</b><p>Hello Everyone, How Are You Guys Doing?</p>&ndash;&gt;-->
+<!--&lt;!&ndash;                  <span class="time-left">20th, April 2021</span>&ndash;&gt;-->
+<!--&lt;!&ndash;                </div> &ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+<!--            <script>-->
+<!--$(document).ready(function(){-->
+
+<!--setInterval(function(){-->
+<!--    $.ajax({-->
+<!--        type: 'GET',-->
+<!--        url : "/getMessages/{{thread_id}}/",-->
+<!--        success: function(response){-->
+<!--            console.log(response);-->
+<!--            $("#display").empty();-->
+<!--            for (var key in response.messages)-->
+<!--            {-->
+<!--                var temp="<div class='container darker'><b>"+response.messages[key].sender_name+"</b><p>"+response.messages[key].message+"</p><span class='time-left'>"+response.messages[key].friends_Chat_Time+"</span></div>";-->
+<!--                $("#display").append(temp);-->
+<!--            }-->
+<!--        },-->
+<!--        error: function(response){-->
+<!--            alert('An error occured')-->
+<!--        }-->
+<!--    });-->
+<!--},1000);-->
+<!--})-->
+<!--</script>-->
+
+<!--</div>-->
+
+<!--        <div class="fixed mt-[400px]">-->
+<!--            <form method="POST">-->
+<!--                {% csrf_token %}-->
+<!--                <input name="message"type="text" placeholder="Type here" class="input input-bordered input-info h-[60px] w-[700px] mt-[100px]"/>-->
+<!--                <input class="btn bg-[#032A47] absolute inset-y-0 right-0 h-[60px] px-4 text-white mt-[100px]" type="submit" value="SEND">-->
+<!--            </form>-->
+<!--          </div>-->
+<!--    </div>-->
+<!--    </div>-->
+<!--<script>-->
+<!--    function showPopup() {-->
+<!--        var popup = document.getElementById("popup");-->
+<!--        popup.style.display = "block";-->
+<!--    }-->
+<!--    setTimeout(showPopup,10000); // 10,000 milliseconds = 10 seconds-->
+<!--    document.getElementById("showPopup").addEventListener("click", function () {-->
+<!--        document.getElementById("popupMessage").style.display = "none";-->
+<!--    });-->
+<!--</script>-->
+<!--<div class="rounded" id="popup"-->
+<!--     style="display: none; position:-->
+<!--     fixed; top: 50%; left: 50%;-->
+<!--     transform: translate(-50%, -50%);-->
+<!--     padding: 20px;-->
+<!--     background-color: #fff;-->
+<!--     border: 1px solid #ccc;-->
+<!--     box-shadow: 2px 2px 5px #999;-->
+<!--     z-index: 1000;">-->
+<!--    <div class="w-12 rounded-full flex">-->
+<!--          <img src="{% static 'bot.png' %}" />-->
+<!--    </div><h1>Hey!!</h1>-->
+<!--    <div class="flex">-->
+
+<!--        <p>Getting bored? Let's talk!</p>-->
+<!--        <a href="http://127.0.0.1:8000/homepage/{{user_name}}/botchat/">-->
+<!--            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">-->
+<!--            <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 01-.825-.242m9.345-8.334a2.126 2.126 0 00-.476-.095 48.64 48.64 0 00-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0011.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155" />-->
+<!--            </svg>-->
+<!--        </a>-->
+<!--    </div>-->
+
+<!--    </div>-->
+<!--</body>-->
+<!--</html>-->
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
@@ -6,6 +260,7 @@
     <link href="https://cdn.jsdelivr.net/npm/daisyui@3.6.2/dist/full.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.tailwindcss.com"></script><!--    daisyUI links-->
     <script src="https://cdn.tailwindcss.com"></script><!--    tailwindcss link-->
+    <script   src="https://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
     <style>
         .navbar {
             position: absolute;
@@ -53,18 +308,38 @@
             </div><h3 class="justify-between text-xl font-semibold">{{friend_name}}</h3>
         </div>
         <div class="mt-[100px] chat-container">
-        <form method="POST">
-        {% csrf_token %}
-        <div class="chat chat-start">
-            {% for message in messages %}
-            <div class="chat-bubble">
-                <h3 class="chat-header text-xl font-bold text-white">{{ message.sender_name }}</h3>
-                {{ message.text }}<br><time class="text-xs font-bold">{{message.time}} </time>
-            </div>
 
-            {% endfor %}
-        </div>
-    </form>
+
+            <div id="display">
+                <!-- <div class="container darker">
+                  <b>Tom</b><p>Hello Everyone, How Are You Guys Doing?</p>
+                  <span class="time-left">20th, April 2021</span>
+                </div> -->
+            </div>
+            <script>
+$(document).ready(function(){
+
+setInterval(function(){
+    $.ajax({
+        type: 'GET',
+        url : "/getMessages/{{thread_id}}/",
+        success: function(response){
+            console.log(response);
+            $("#display").empty();
+            for (var key in response.messages)
+            {
+                var temp="<div class='container darker'><b>"+response.messages[key].sender_name+"</b><p>"+response.messages[key].message+"</p><span class='time-left'>"+response.messages[key].friends_Chat_Time+"</span></div>";
+                $("#display").append(temp);
+            }
+        },
+        error: function(response){
+            alert('An error occured')
+        }
+    });
+},1000);
+})
+</script>
+
 </div>
 
         <div class="fixed mt-[400px]">
