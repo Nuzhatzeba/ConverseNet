@@ -14,6 +14,19 @@
             right: 0;
             z-index: 1;
         }
+        .chat-bubble {
+        margin-bottom: 10px;
+        padding: 10px;
+        max-width: 80%;
+        word-wrap: break-word;
+        }
+
+       .chat-container {
+         max-height: 600px;
+        overflow-y: auto;
+        margin-bottom: 80px;
+        }
+
     </style>
 </head>
 <body>
@@ -25,7 +38,7 @@
         </div>
     </div>
     <div class="grid h-[570px] w-[400px] flex-grow card rounded-box" style="background-color: #f0f0f0; background-image: url('{% static 'Chats.png' %}');">
-<!--      navbar start-->
+
         <div class="navbar bg-base-100">
             <div class="dropdown dropdown-end">
                 <label tabindex="0" class="btn btn-ghost btn-circle avatar">
@@ -34,32 +47,67 @@
                     </div>
                 </label>
                 <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-                    <li><a target="_parent" ><button id="back">Home</button></a></li>
-                    <li><a>Logout</a></li>
+                <li><a target="_parent" href="http://127.0.0.1:8000/homepage/{{user_name}}" ><button id="back">Home</button></a></li>
+                <li><a href="/loadout/">Logout</a></li>
                 </ul>
             </div><h3 class="justify-between text-xl font-semibold">{{friend_name}}</h3>
         </div>
-<!--      navbar finished-->
+        <div class="mt-[100px] chat-container">
+        <form method="POST">
+        {% csrf_token %}
+        <div class="chat chat-start">
+            {% for message in messages %}
+            <div class="chat-bubble">
+                <h3 class="chat-header text-xl font-bold text-white">{{ message.sender_name }}</h3>
+                {{ message.text }}<br><time class="text-xs font-bold">{{message.time}} </time>
+            </div>
 
-<!--      chat start-->
-        <div class="mt-[100px]">
-            <form method="POST">
-                {%csrf_token%}
-                <div class="chat chat-start">
-                    {% for msg in messages %}
-                    <div class="chat-bubble">
-                        <h3 class=" chat-header text-xl font-bold text-white">Name</h3>
-                        {{msg}}
-                    </div>
-                    {% endfor %}
-                </div>
-                <div class="relative mt-[250px]">
-                    <input name="message" type="text" placeholder="Type here" class="input input-bordered input-info h-[60px] w-full"/>
-                    <input class="btn bg-[#032A47] absolute inset-y-0 right-0 h-[60px] px-4 text-white mt-[100px]" type="submit" value="SEND">
-                </div>
-            </form>
+            {% endfor %}
         </div>
+    </form>
+</div>
+
+        <div class="fixed mt-[400px]">
+            <form method="POST">
+                {% csrf_token %}
+                <input name="message"type="text" placeholder="Type here" class="input input-bordered input-info h-[60px] w-[700px] mt-[100px]"/>
+                <input class="btn bg-[#032A47] absolute inset-y-0 right-0 h-[60px] px-4 text-white mt-[100px]" type="submit" value="SEND">
+            </form>
+          </div>
     </div>
+    </div>
+<script>
+    function showPopup() {
+        var popup = document.getElementById("popup");
+        popup.style.display = "block";
+    }
+    setTimeout(showPopup,10000); // 10,000 milliseconds = 10 seconds
+    document.getElementById("showPopup").addEventListener("click", function () {
+        document.getElementById("popupMessage").style.display = "none";
+    });
+</script>
+<div class="rounded" id="popup"
+     style="display: none; position:
+     fixed; top: 50%; left: 50%;
+     transform: translate(-50%, -50%);
+     padding: 20px;
+     background-color: #fff;
+     border: 1px solid #ccc;
+     box-shadow: 2px 2px 5px #999;
+     z-index: 1000;">
+    <div class="w-12 rounded-full flex">
+          <img src="{% static 'bot.png' %}" />
+    </div><h1>Hey!!</h1>
+    <div class="flex">
+
+        <p>Getting bored? Let's talk!</p>
+        <a href="http://127.0.0.1:8000/homepage/{{user_name}}/botchat/">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 01-.825-.242m9.345-8.334a2.126 2.126 0 00-.476-.095 48.64 48.64 0 00-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0011.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155" />
+            </svg>
+        </a>
+    </div>
+
     </div>
 </body>
 </html>
