@@ -269,19 +269,11 @@
             right: 0;
             z-index: 1;
         }
-        .chat-bubble {
-        margin-bottom: 10px;
-        padding: 10px;
-        max-width: 80%;
+        .wrap {
+        max-width: 50%;
         word-wrap: break-word;
-        }
 
-       .chat-container {
-         max-height: 600px;
-        overflow-y: auto;
-        margin-bottom: 80px;
         }
-
     </style>
 </head>
 <body>
@@ -307,48 +299,50 @@
                 </ul>
             </div><h3 class="justify-between text-xl font-semibold">{{friend_name}}</h3>
         </div>
-        <div class="mt-[100px] chat-container">
-
-
-            <div id="display">
-                <!-- <div class="container darker">
-                  <b>Tom</b><p>Hello Everyone, How Are You Guys Doing?</p>
-                  <span class="time-left">20th, April 2021</span>
-                </div> -->
+        <div class="mt-[100px] chat-container" style="margin-bottom: 100px; position: relative;">
+         <div id="display" class="fixed h-[450px]" style="overflow-y: auto;">
             </div>
             <script>
-$(document).ready(function(){
+            $(document).ready(function(){
 
-setInterval(function(){
-    $.ajax({
-        type: 'GET',
-        url : "/getMessages/{{thread_id}}/",
-        success: function(response){
-            console.log(response);
-            $("#display").empty();
-            for (var key in response.messages)
-            {
-                var temp="<div class='container darker'><b>"+response.messages[key].sender_name+"</b><p>"+response.messages[key].message+"</p><span class='time-left'>"+response.messages[key].friends_Chat_Time+"</span></div>";
-                $("#display").append(temp);
-            }
-        },
-        error: function(response){
-            alert('An error occured')
-        }
-    });
-},1000);
-})
+            setInterval(function(){
+                $.ajax({
+                    type: 'GET',
+                    url : "/getMessages/{{thread_id}}/",
+                    success: function(response){
+                        console.log(response);
+                        $("#display").empty();
+                        for (var key in response.messages)
+                        {
+                            var temp="<div><div class='wrap chat-bubble chat-bubble-white'><b>"+response.messages[key].sender_name+"</b><p>"+response.messages[key].message+"</p><span class='time-left'>"+response.messages[key].friends_Chat_Time+"</span></div><br><br></div>";
+                            $("#display").append(temp);
+                        }
+                    },
+                    error: function(response){
+                        alert('An error occured')
+                    }
+                });
+            },1000);
+            })
 </script>
 
 </div>
-
         <div class="fixed mt-[400px]">
-            <form method="POST">
-                {% csrf_token %}
-                <input name="message"type="text" placeholder="Type here" class="input input-bordered input-info h-[60px] w-[700px] mt-[100px]"/>
-                <input class="btn bg-[#032A47] absolute inset-y-0 right-0 h-[60px] px-4 text-white mt-[100px]" type="submit" value="SEND">
-            </form>
-          </div>
+    <form method="POST">
+        {% csrf_token %}
+        <input name="message" type="text" placeholder="Type here" class="input input-bordered input-info h-[60px] w-[700px] mt-[100px]" />
+        <input class="btn bg-[#032A47] absolute inset-y-0 right-0 h-[60px] px-4 text-white mt-[100px]" type="submit" value="SEND" />
+    </form>
+</div>
+
+
+<!--        <div class="fixed relative mt-[400px]">-->
+<!--            <form method="POST">-->
+<!--                {% csrf_token %}-->
+<!--                <input name="message"type="text" placeholder="Type here" class="input input-bordered input-info h-[60px] w-[700px] mt-[100px]"/>-->
+<!--                <input class="btn bg-[#032A47] absolute inset-y-0 right-0 h-[60px] px-4 text-white mt-[100px]" type="submit" value="SEND">-->
+<!--            </form>-->
+<!--          </div>-->
     </div>
     </div>
 <script>
@@ -356,33 +350,44 @@ setInterval(function(){
         var popup = document.getElementById("popup");
         popup.style.display = "block";
     }
-    setTimeout(showPopup,10000); // 10,000 milliseconds = 10 seconds
-    document.getElementById("showPopup").addEventListener("click", function () {
-        document.getElementById("popupMessage").style.display = "none";
-    });
+    setTimeout(showPopup, 10000); // 10,000 milliseconds = 10 seconds
+
 </script>
+
 <div class="rounded" id="popup"
-     style="display: none; position:
-     fixed; top: 50%; left: 50%;
+     style="display: none; position: fixed; top: 50%; left: 50%;
      transform: translate(-50%, -50%);
      padding: 20px;
      background-color: #fff;
      border: 1px solid #ccc;
      box-shadow: 2px 2px 5px #999;
      z-index: 1000;">
-    <div class="w-12 rounded-full flex">
-          <img src="{% static 'bot.png' %}" />
-    </div><h1>Hey!!</h1>
-    <div class="flex">
 
+    <!-- Close button -->
+    <button id="closeButton" style="position: absolute; top: 10px; right: 10px; background: transparent; border: none; font-size: 20px; cursor: pointer;">&times;</button>
+
+    <div class="w-12 rounded-full flex">
+        <img src="{% static 'bot.png' %}" />
+    </div>
+    <h1>Hey!!</h1>
+    <div class="flex">
         <p>Getting bored? Let's talk!</p>
         <a href="http://127.0.0.1:8000/homepage/{{user_name}}/botchat/">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 01-.825-.242m9.345-8.334a2.126 2.126 0 00-.476-.095 48.64 48.64 0 00-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0011.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155" />
+              <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 01-.825-.242m9.345-8.334a2.126 2.126 0 00-.476-.095 48.64 48.64 0 00-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0011.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155" />
             </svg>
         </a>
     </div>
+</div>
+<script>
+// Function to close the popup
+function closePopup() {
+    var popup = document.getElementById("popup");
+    popup.style.display = "none";
+}
 
-    </div>
+// Add an event listener to the close button
+document.getElementById("closeButton").addEventListener("click", closePopup);
+</script>
 </body>
 </html>
