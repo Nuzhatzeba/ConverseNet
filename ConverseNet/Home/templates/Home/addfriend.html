@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
- <title>fb.in</title>
+ <title>Add Friend</title>
  <!-- font cdn -->
  <script src='https://kit.fontawesome.com/a076d05399.js'></script>
  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -20,7 +20,7 @@ body{
  display: flex;
  align-items:center;
  justify-content: center;
-    background-color:#f1f1f1 ;
+    background-image:url(https://i.pinimg.com/564x/d2/91/d9/d291d9b6c2167d539628de414b0c74a9.jpg) ;
 }
 #fb-cover{
  width:501px;
@@ -83,11 +83,11 @@ i{
 
  width:500px;
  height: 300px;
- background-color:rgb(0, 128, 247);
+ background-color:#088F8F;
  position: relative;
  top:200px;
  right:200px;
- border-radius:10px 0 0 10px;
+ border-radius:none;
  transition-duration:3s;
     box-shadow:-1px 1px 3px rgba(0,0,0,0.9);
 }
@@ -119,21 +119,7 @@ i{
 
 
 }
-#confirm{
- padding:5px 25px 5px 25px ;
-    position: relative;
- top:-60px;
- left: 70px;
- color:rgb(0, 128, 247) ;
- background-color: #f1f1f1;
-    font-size: 28px;
 
-    border:none;
-    border-radius:5px ;
-
- font-family: 'Quicksand', sans-serif;
-
-}
 
 #add{
  padding:5px 25px 5px 25px ;
@@ -225,9 +211,9 @@ width:500px;
             <div class="scroll-div">
                  <div class="scroll-object">
                <span id="ic" style="font-size:38px;position:relative;left:180px;top:-50px;color:green;visibility: hidden" class="material-icons"> check</span>
-               {% for request in requests %}
+ {% for request in requests %}
               <p id="me">{{friend_name}}</p>
-       <button id="cancel" onclick="ree()">Requested</button>
+
        <button id="confirm" onclick="re()">Remove</button>
        {% endfor %}
       </div>
@@ -272,12 +258,7 @@ width:500px;
     aa.style.transform="rotate(0deg)";
   }
 
-  function ree(){
-   g.style.left="310px";
-    r.style.right="200px";
 
-    aa.style.transform="rotate(0deg)";
-  }
 
 
 
