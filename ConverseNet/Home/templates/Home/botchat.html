@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
@@ -8,11 +8,11 @@
     <script src="https://cdn.tailwindcss.com"></script><!--    tailwindcss link-->
     <style>
     .user-message {
-    background-color: #A5D9FF; /* Define a style for user messages */
+    background-color: #A5D9FF;
     max-width: 600px;
     }
     .bot-message {
-        background-color: #E8E8E8; /* Define a style for bot messages */
+        background-color: #fff;
         max-width: 500px;
     }
         .navbar {
@@ -65,37 +65,23 @@
                 {% endif %}
             </h3>
             <div class="max-w-4/5 mx-[20px]">
-                <p class="rounded text-center {% if message.sender == 'user' %}
+
+                <p class="rounded  font-semibold text-center {% if message.sender == 'user' %}
                 user-message
                 {% else %}
                 bot-message
-                {% endif %}" style="color: black max-width: 80%; word-wrap: break-word;">{{ message.text }}</p>
-                <time class="text-xs font-bold">{{message.time}} </time>
+                {% endif %} w-[250px] h-[50px]" style="color: black max-width: 80%; word-wrap: break-word;">{{ message.text }}
+                    <br><br><time class="text-xs font-bold">{{message.time}}
+                    </time></p>
+
+
             </div>
             <br>
         </div>
     </div>
 {% endfor %}
-
-<!--        <div class="chat-bubble">-->
-<!--        <h3 class="chat-header text-xl font-bold text-white">ROBO</h3>-->
-<!--        <form method="POST">-->
-<!--            {% csrf_token %}-->
-<!--            {% for msg in messages %}-->
-<!--            <div class="bg-primary rounded py-2 px-3 mb-2">-->
-<!--                <p style="color: black">{{ msg }}</p>-->
-<!--            </div>-->
-<!--            <br>-->
-<!--            {% endfor %}-->
-<!--        </form>-->
-<!--    </div>-->
 </div>
-<!--    <div class="chat chat-end">-->
-<!--      <div class="chat-bubble">-->
-<!--&lt;!&ndash;          <h3 class=" text-xl font-bold text-white">{{user_full_name}}</h3>&ndash;&gt;-->
-<!--&lt;!&ndash;          I hate you too!</div>&ndash;&gt;-->
-<!--    </div>-->
-<!--          </div>-->
+
 </div>
       <div class="fixed mt-[400px]">
             <form method="POST">

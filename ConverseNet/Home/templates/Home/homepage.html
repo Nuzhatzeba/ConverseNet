@@ -12,67 +12,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
 </head>
-<!--<style>-->
-<!--    *{-->
-<!--  margin:0;-->
-<!--  padding:0;-->
 
-<!--}-->
-
-<!--.container{-->
-<!--  height:100vh;-->
-<!--  width:100%;-->
-<!--  background-image: url(https://pagenorth.co.uk/wp-content/uploads/2023/03/blog-feature-image-bots.jpg);-->
-<!--  backgroung-size: cover;-->
-<!--  background-position: relative;-->
-<!--  position: relative;-->
-
-<!--}-->
-
-<!--.navbar{-->
-<!-- width:100%;-->
-<!-- margin:auto;-->
-<!-- padding: 15px 0;-->
-<!-- background-color:#203354;-->
-<!-- display: flex;-->
-<!-- align-items:center;-->
-<!-- justify-content:space-between;-->
-<!--}-->
-<!--    .navbar ul li{-->
-<!--  list-style:none;-->
-
-<!--  display:inline-block;-->
-<!--  margin: 0 15px;-->
-<!--}-->
-<!--.navbar ul li a{-->
-<!--text-decoration:none;-->
-
-<!--color:#fff;-->
-<!--font-size:15px;-->
-<!--}-->
-<!--.content{-->
-<!-- width:100%;-->
-<!-- position:absolute;-->
-<!-- top:30%;-->
-<!--}-->
-
-<!--.left-col{-->
-<!-- margin-left:6%;-->
-
-<!--}-->
-
-<!--.left-col h1{-->
-<!-- font-size:50px;-->
-<!-- color:#203354;-->
-<!-- line-height:150px;-->
-<!-- position:absolute;-->
-<!-- right:540px;-->
-<!--}-->
-
-
-
-
-<!--</style>-->
 <style>
     .font{
     font-family: 'Pacifico', cursive;
@@ -177,21 +117,7 @@
         <li><a href="profile">Profile</a></li>
         <li><a href="addfriend">Add Friend</a></li>
 
-<!--         <li><div class="container">-->
-<!--       <div id="content">-->
-<!--         <form class='form-inline' method="POST">-->
-<!--          {% csrf_token%}-->
-<!--        <div class="input-group">-->
-<!--          <input type='text' name='email' id='search' class="form-control search-form" placeholder="Search a Friend">-->
-<!--          <span class="input-group-btn" style="width:20px">-->
-<!--            <div class="input-group-btn" style="width:20px"class="d-flex justify-content-center mt-3 login_container" >-->
-<!--                <input class="btn login_btn" type="submit" value="SEARCH">-->
-<!--            </div>-->
-<!--          </span>-->
-<!--        </div>-->
-<!--          {% include 'Home/flash-msg.html' %}-->
-<!--      </form>-->
-<!--        </div></li>-->
+
 
 
     </ul>
@@ -204,7 +130,7 @@
                     <path d="M16.72 17.78a.75.75 0 1 0 1.06-1.06l-1.06 1.06ZM9 14.5A5.5 5.5 0 0 1 3.5 9H2a7 7 0 0 0 7 7v-1.5ZM3.5 9A5.5 5.5 0 0 1 9 3.5V2a7 7 0 0 0-7 7h1.5ZM9 3.5A5.5 5.5 0 0 1 14.5 9H16a7 7 0 0 0-7-7v1.5Zm3.89 10.45 3.83 3.83 1.06-1.06-3.83-3.83-1.06 1.06ZM14.5 9a5.48 5.48 0 0 1-1.61 3.89l1.06 1.06A6.98 6.98 0 0 0 16 9h-1.5Zm-1.61 3.89A5.48 5.48 0 0 1 9 14.5V16a6.98 6.98 0 0 0 4.95-2.05l-1.06-1.06Z"></path>
                     </svg></div>
                     <input type="text" name='email' id='search'class="w-full max-w-[160px] bg-white pl-2 text-base font-semibold outline-0" placeholder="Search a Friend" id="">
-                    <input class="bg-blue-500 p-2 rounded-tr-lg rounded-br-lg text-white font-semibold hover:bg-blue-800 transition-colors" type="submit" value="SEARCH">
+                    <input class="bg-blue-500 p-2 rounded-tr-lg rounded-br-lg text-black font-semibold hover:bg-blue-800 transition-colors" type="submit" value="SEARCH">
                     </div>
                 {% include 'Home/flash-msg.html' %}
                 </form>

@@ -10,18 +10,37 @@ import json
 from .models import ConverseNetUser, Profile, Bot_Message, FriendsThread, Requests, FriendsThreadMessage, Diary
 
 
+# def getMessages(request, thread_id):
+#     friends = FriendsThread.objects.get(id=thread_id)  # thread model
+#     message_collection = FriendsThreadMessage.objects.filter(thread_Id=friends.id)  # message model
+#     lists_of_message = []
+#     for message in message_collection:
+#         chat = message.message
+#         time = message.friends_Chat_Time.strftime("%m/%d/%Y, %H:%M:%S")
+#         sender = ConverseNetUser.objects.get(id=message.sender_Id.id)
+#         sender_name = sender.first_name + " " + sender.last_name
+#         history = str(sender_name.upper() + ":" + chat + "       " + time)
+#         lists_of_message.append(history)
+#     return lists_of_message
+
 def getMessages(request, thread_id):
     friends = FriendsThread.objects.get(id=thread_id)  # thread model
     message_collection = FriendsThreadMessage.objects.filter(thread_Id=friends.id)  # message model
-    lists_of_message = []
+    messages = []
     for message in message_collection:
         chat = message.message
         time = message.friends_Chat_Time.strftime("%m/%d/%Y, %H:%M:%S")
         sender = ConverseNetUser.objects.get(id=message.sender_Id.id)
         sender_name = sender.first_name + " " + sender.last_name
-        history = str(sender_name.upper() + ":" + chat + "       " + time)
-        lists_of_message.append(history)
-    return lists_of_message
+        is_user_message = sender.id == request.user.id  # Check if the sender is the current user
+        messages.append({
+            "text": chat,
+            "sender_name": sender_name,
+            "is_user_message": is_user_message,
+            "time": time,
+        })
+    return messages
+
 
 
 def botchat(request, user_name):

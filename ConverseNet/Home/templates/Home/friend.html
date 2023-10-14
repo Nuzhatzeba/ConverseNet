@@ -83,7 +83,7 @@ i{
 
  width:500px;
  height: 300px;
- background-color:#088F8F;
+ background-image:url(https://i.pinimg.com/564x/78/53/f2/7853f2d470e1617069d7e6079f15b57f.jpg);
  position: relative;
  top:200px;
  right:200px;
@@ -103,6 +103,23 @@ i{
  border-radius:0px 10px 10px 0px;
 
 }
+#confirm{
+ padding:5px 25px 5px 25px;
+    position: relative;
+ top:-60px;
+  left:50px;
+ color: #fff;
+ background-color:
+ rgb(0, 128, 247);
+    font-size: 28px;
+    border:none;
+    border-radius:5px ;
+
+ font-family: 'Quicksand', sans-serif;
+
+
+}
+
 #cancel{
  padding:5px 25px 5px 25px;
     position: relative;
@@ -231,7 +248,8 @@ width:500px;
  {% for request in requests %}
               <p id="me">{{friend_name}}</p>
 
-       <button id="confirm" onclick="re()">Remove</button>
+       <button id="confirm" onclick="re()">Add</button>
+       <button id="cancel" onclick="re()">Delete</button>
        {% endfor %}
       </div>
 
@@ -244,12 +262,6 @@ width:500px;
 
      <div id="request">
 
-      <i class='fab fa-facebook-square' style='font-size:100px;color:#fff'></i>
-
-
-      <input type="add" id="add" placeholder="Enter an email"  >
- <button id="can" >Send Request</button>
-<button id="cans" >Back</button>
 
      </div>
 
