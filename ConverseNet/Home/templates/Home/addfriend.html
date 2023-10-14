@@ -139,8 +139,9 @@ i{
 #can{
  padding:5px 25px 5px 25px ;
     position: relative;
+    margin-bottom:300px;
  top:100px;
- left: 100px;
+ left: 200px;
  color:rgb(0, 128, 247) ;
  background-color: #f1f1f1;
     font-size: 28px;
@@ -227,6 +228,8 @@ width:500px;
          <div class="scroll-bg">
             <div class="scroll-div">
                  <div class="scroll-object">
+                     <form method="POST" >
+                     {%csrf_token%}
                <span id="ic" style="font-size:38px;position:relative;left:180px;top:-50px;color:green;visibility: hidden" class="material-icons"> check</span>
  {% for request in requests %}
               <p id="me">{{friend_name}}</p>
@@ -235,7 +238,7 @@ width:500px;
        {% endfor %}
       </div>
 
-            </div></div></div>
+            </div></div></div></form>
 
      <button id="open" onclick="op()">
       <span id="aa" style="font-size:36px" class="material-icons">  keyboard_arrow_right</span>
@@ -245,15 +248,18 @@ width:500px;
      <div id="request">
 
       <i class='fab fa-facebook-square' style='font-size:100px;color:#fff'></i>
+<form method="POST" >
+                     {%csrf_token%}
+<a target="_parent" href="http://127.0.0.1:8000/homepage/{{user_name}}" style="color: blue" class="p">Back </a>
 
+     <input type="text" id="add" name="friend_email" placeholder="Enter friend's Email" class="form-control" >
 
-      <input type="add" id="add" placeholder="Enter an email"  >
- <button id="can" >Send Request</button>
-<button id="cans" >Back</button>
+     <input class="btn login_btn" id="can" type="submit" value="Send">
+
 
      </div>
-
-
+</form>
+ {% include 'Home/flash-msg.html' %}
 
 
      <!-- script -->
