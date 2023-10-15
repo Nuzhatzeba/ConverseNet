@@ -17,4 +17,7 @@ urlpatterns = [
     path('homepage/<str:user_name>/ResetPassword', views.password_reset, name='password'),
     path('homepage/<str:user_name>/addfriend/', views.addfriend_page, name='addfriend'),
 
+
+
+
 ]
