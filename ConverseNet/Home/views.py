@@ -128,6 +128,9 @@ def addfriend_page(request, user_name):
         return render(request, 'Home/addfriend.html', {'user_name': user_name})
 
 
+
+
+
 def login(request):
     if request.method == 'POST':
         client_email = request.POST['email1']
