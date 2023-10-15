@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <title>Add Friend</title>
+ <!-- font cdn -->
+ <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+ <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+ <!-- css reference link -->
+ <link rel="stylesheet" type="text/css" href="fb.css">
+
+</head>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400&display=swap');
+/*for font*/
+*{
+ box-sizing: border-box;
+}
+body{
+ display: flex;
+ align-items:center;
+ justify-content: center;
+    background-image:url(https://i.pinimg.com/564x/d2/91/d9/d291d9b6c2167d539628de414b0c74a9.jpg) ;
+}
+#fb-cover{
+ width:501px;
+ height: 290px;
+ background-color:#fff;
+ position: relative;
+ top:200px;
+ left:290px;
+ right:10px;
+ border-radius:0 10px 10px 0;
+ box-shadow:1px 2px 3px rgba(0,0,0,0.9);
+    transition-duration:3s;
+
+}
+#i1{
+position: relative;
+ top:-48px;
+ right: -0px;
+
+}
+#i2{
+ position: relative;
+ top:-45px;
+    left:96px;
+}
+i{
+ position: relative;
+ left:200px;
+
+}
+#loader{
+ width: 90%;
+ height: 10px;
+ background-color: #fff;
+    border-radius: 5px;
+    position: relative;
+ top:65px;
+ right: -10px;
+
+}
+#rec{
+   position: relative;
+ top:-190px;
+ left:35px;
+ color:#fff;
+ font-size:30px;
+ font-family: 'Quicksand', sans-serif;
+
+}
+#h{
+  position: relative;
+ top:-150px;
+ right:-230px;
+ color:#fff;
+ font-size:38px;
+ font-family: 'Quicksand', sans-serif;
+
+}
+#request{
+
+ width:500px;
+ height: 300px;
+ background-color:#088F8F;
+ position: relative;
+ top:200px;
+ right:200px;
+ border-radius:none;
+ transition-duration:3s;
+    box-shadow:-1px 1px 3px rgba(0,0,0,0.9);
+}
+#open{
+ padding:5px ;
+    position: relative;
+ top:-185px;
+ left:501px;
+ color: #fff;
+ background-color:
+ rgb(0, 128, 247);
+ border: none;
+ border-radius:0px 10px 10px 0px;
+
+}
+#cancel{
+ padding:5px 25px 5px 25px;
+    position: relative;
+ top:-60px;
+  left:50px;
+ color: #fff;
+ background-color:
+ rgb(0, 128, 247);
+    font-size: 28px;
+    border:none;
+    border-radius:5px ;
+
+ font-family: 'Quicksand', sans-serif;
+
+
+}
+
+
+#add{
+ padding:5px 25px 5px 25px ;
+    position: relative;
+ top:80px;
+ left: 100px;
+ color:rgb(0, 128, 247) ;
+ background-color: #f1f1f1;
+    font-size: 28px;
+
+    border:none;
+    border-radius:50px ;
+
+ font-family: 'Quicksand', sans-serif;
+
+}
+#can{
+ padding:5px 25px 5px 25px ;
+    position: relative;
+    margin-bottom:300px;
+ top:100px;
+ left: 200px;
+ color:rgb(0, 128, 247) ;
+ background-color: #f1f1f1;
+    font-size: 28px;
+
+    border:none;
+    border-radius:100px ;
+
+ font-family: 'Quicksand', sans-serif;
+
+}
+
+#cans{
+ padding:5px 25px 5px 25px ;
+    position: relative;
+ top:100px;
+ left: 100px;
+ color:rgb(0, 128, 247) ;
+ background-color: #f1f1f1;
+    font-size: 28px;
+
+    border:none;
+    border-radius:100px ;
+
+ font-family: 'Quicksand', sans-serif;
+
+}
+
+#frm{
+ position: relative;
+ left: 180px;
+ top:-0px;
+
+}
+#me{
+    position: relative;
+ left: 200px;
+ top:-40px;
+    font-size:35px;
+ font-family: 'Quicksand', sans-serif;
+ color:grey;
+
+}
+button{
+ cursor: pointer;
+}
+
+
+.scroll-bg {   margin:-5% auto;
+
+width: 400px;
+
+background:sky blue;
+padding:10px 20px;
+
+}
+.scroll-div {
+
+width: 450px;
+height: 300px;
+overflow: hidden;
+overflow-y: scroll;
+
+
+}
+.scroll-object {
+color:sky blue;
+font-family:cursive;
+font-size:16px;
+padding:15px;
+width:500px;
+
+
+}
+
+</style>
+
+
+<body>
+
+
+   <div id="fb-cover">
+
+      <div id="but-con">
+         <div class="scroll-bg">
+            <div class="scroll-div">
+                 <div class="scroll-object">
+                     <form method="POST" >
+                     {%csrf_token%}
+               <span id="ic" style="font-size:38px;position:relative;left:180px;top:-50px;color:green;visibility: hidden" class="material-icons"> check</span>
+
+               <p id="me">Friends List:</p>
+                 <ul>
+                     {% for friend_thread in friends_list %}
+                     <li>{{ friend_thread.friends_User_id_Person2.first_name }} {{ friend_thread.friends_User_id_Person2.last_name }}</li>
+                     {% endfor %}
+                 </ul>
+
+
+
+
+      </div>
+
+            </div></div></div></form>
+
+     <button id="open" onclick="op()">
+      <span id="aa" style="font-size:36px" class="material-icons">  keyboard_arrow_right</span>
+     </button>
+     </div>
+
+     <div id="request">
+
+      <i class='fab fa-facebook-square' style='font-size:100px;color:#fff'></i>
+<form method="POST" >
+                     {%csrf_token%}
+<a target="_parent" href="http://127.0.0.1:8000/homepage/{{user_name}}" style="color: blue" class="p">Back </a>
+
+     <input type="text" id="add" name="friend_email" placeholder="Enter friend's Email" class="form-control" >
+
+     <input class="btn login_btn" id="can" type="submit" value="Send">
+
+
+     </div>
+</form>
+ {% include 'Home/flash-msg.html' %}
+
+
+     <!-- script -->
+<script type="text/javascript">
+   var g=document.getElementById('fb-cover');
+   var r=document.getElementById('request');
+    var o=document.getElementById('open');
+      var ic=document.getElementById('ic');
+      var h=document.getElementById("h");
+      var rec=document.getElementById("rec");
+      var aa=document.getElementById("aa");
+  function op(){
+   g.style.left="600px";
+    r.style.right="400px";
+
+    aa.style.transform="rotate(-180deg)";
+  }
+  function re(){
+   g.style.left="310px";
+    r.style.right="200px";
+
+    aa.style.transform="rotate(0deg)";
+  }
+
+
+
+
+
+  </script>
+  <!-- script end -->
+</body>
+</html>
