@@ -470,3 +470,8 @@ def addfriend_page(request, user_name):
             us1 = ConverseNetUser.objects.get(email=user_email)
             friends_list = FriendsThread.objects.filter(friends_User_id_Person1=us1)
             return render(request, 'Home/addfriend.html', {'user_name': user_name, 'friends_list': friends_list})
+
+
+
+
+

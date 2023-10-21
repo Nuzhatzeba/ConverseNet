@@ -20,7 +20,7 @@ body{
  display: flex;
  align-items:center;
  justify-content: center;
-    background-image:url(https://i.pinimg.com/564x/d2/91/d9/d291d9b6c2167d539628de414b0c74a9.jpg) ;
+    background-color: #ADD8E6;
 }
 #fb-cover{
  width:501px;
@@ -83,7 +83,7 @@ i{
 
  width:500px;
  height: 300px;
- background-color:#088F8F;
+ background-color:#87CEEB;
  position: relative;
  top:200px;
  right:200px;
@@ -140,8 +140,8 @@ i{
  padding:5px 25px 5px 25px ;
     position: relative;
     margin-bottom:300px;
- top:100px;
- left: 200px;
+ top:150px;
+ right: 120px;
  color:rgb(0, 128, 247) ;
  background-color: #f1f1f1;
     font-size: 28px;
@@ -215,13 +215,20 @@ width:500px;
 
 
 }
+.edit{
+height:20%;
+width:20%;
+margin-top:240px;
+margin-right:800px;
+position:absolute;
+}
 
 </style>
 
 
-<body>
-
-
+<body><div class="edit">
+<img src="https://i.pinimg.com/originals/0d/a5/cb/0da5cbca5d728a789100439958f50235.gif" >
+</div>
    <div id="fb-cover">
 
       <div id="but-con">
@@ -235,7 +242,10 @@ width:500px;
                <p id="me">Friends List:</p>
                  <ul>
                      {% for friend_thread in friends_list %}
-                     <li>{{ friend_thread.friends_User_id_Person2.first_name }} {{ friend_thread.friends_User_id_Person2.last_name }}</li>
+                     <li>{{ friend_thread.friends_User_id_Person2.first_name }} {{ friend_thread.friends_User_id_Person2.last_name }}
+
+                     </li>
+
                      {% endfor %}
                  </ul>
 
@@ -256,14 +266,15 @@ width:500px;
       <i class='fab fa-facebook-square' style='font-size:100px;color:#fff'></i>
 <form method="POST" >
                      {%csrf_token%}
-<a target="_parent" href="http://127.0.0.1:8000/homepage/{{user_name}}" style="color: blue" class="p">Back </a>
+<a href="http://127.0.0.1:8000/homepage/{{user_name}}">
+    <svg width="24" height="24" viewBox="0 0 24 24"><path fill="blue" d="M12 9.059V6.5a1.001 1.001 0 0 0-1.707-.708L4 12l6.293 6.207a.997.997 0 0 0 1.414 0A.999.999 0 0 0 12 17.5v-2.489c2.75.068 5.755.566 8 3.989v-1c0-4.633-3.5-8.443-8-8.941z"/></svg>
 
-     <input type="text" id="add" name="friend_email" placeholder="Enter friend's Email" class="form-control" >
+    </a>
+     <input type="text" id="add" name="friend_email" placeholder="Enter Friend's Email" class="form-control" >
 
-     <input class="btn login_btn" id="can" type="submit" value="Send">
+     <input class="btn login_btn" id="can" type="submit" value="Add">
 
 
-     </div>
 </form>
  {% include 'Home/flash-msg.html' %}
 

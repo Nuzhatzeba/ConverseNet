@@ -284,7 +284,7 @@
             <img src="{% static 'image 2.png' %}" alt="" srcset="">
         </div>
     </div>
-    <div class="grid h-[570px] w-[400px] flex-grow card rounded-box" style="background-color: #f0f0f0; background-image: url('{% static 'Chats.png' %}');">
+    <div class="grid h-[750px] w-[400px] flex-grow card rounded-box" style="background-color: #f0f0f0; background-image: url('{% static 'Chats.png' %}');">
 
         <div class="navbar bg-base-100">
             <div class="dropdown dropdown-end">
@@ -300,7 +300,7 @@
             </div><h3 class="justify-between text-xl font-semibold">{{friend_name}}</h3>
         </div>
         <div class="mt-[100px] chat-container" style="margin-bottom: 100px; position: relative;">
-         <div id="display" class="fixed h-[450px]" style="overflow-y: auto;">
+         <div id="display" class="fixed h-[550px] w-[840px]" style="overflow-y: auto;">
             </div>
             <script>
             $(document).ready(function(){
@@ -327,10 +327,10 @@
 </script>
 
 </div>
-        <div class="fixed mt-[400px]">
+        <div class="fixed mt-[570px]">
     <form method="POST">
         {% csrf_token %}
-        <input name="message" type="text" placeholder="Type here" class="input input-bordered input-info h-[60px] w-[700px] mt-[100px]" />
+        <input name="message" type="text" placeholder="Type here" class="input input-bordered input-info h-[60px] w-[800px] mt-[100px]" />
         <input class="btn bg-[#032A47] absolute inset-y-0 right-0 h-[60px] px-4 text-white mt-[100px]" type="submit" value="SEND" />
     </form>
 </div>
