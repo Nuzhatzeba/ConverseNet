@@ -34,7 +34,7 @@
 
   </div>
 
-  <div class="grid h-[570px] w-[400px] flex-grow card rounded-box" style="background-color: #f0f0f0; background-image: url('{% static 'Chats.png' %}');">
+  <div class="grid h-[750px] w-[400px] flex-grow card rounded-box" style="background-color: #f0f0f0; background-image: url('{% static 'Chats.png' %}');">
 <!--      navbar start-->
       <div class="navbar bg-base-100">
           <div class="dropdown dropdown-end">
@@ -52,8 +52,8 @@
 <!--      navbar finished-->
 
 <!--      chat start-->
-      <div class="chat-container h-[550px]" style="overflow-y: auto;">
-      <div class="chat h-auto ">
+      <div class="chat-container h-[700px]" style="overflow-y: auto;">
+      <div class="chat h-auto h-[550px] w-[750px] ">
           {% for message in messages %}
         <div class="chat mt-[100px]">
         <div class="">
@@ -83,10 +83,10 @@
 </div>
 
 </div>
-      <div class="fixed mt-[400px]">
+      <div class="fixed mt-[570px]">
             <form method="POST">
                 {% csrf_token %}
-                <input name="message"type="text" placeholder="Type here" class="input input-bordered input-info h-[60px] w-[650px] mt-[100px]"/>
+                <input name="message"type="text" placeholder="Type here" class="input input-bordered input-info h-[60px] w-[780px] mt-[100px]"/>
                 <input class="btn bg-[#032A47] absolute inset-y-0 right-0 h-[60px] px-4 text-white mt-[100px]" type="submit" value="SEND">
             </form>
           </div>

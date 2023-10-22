@@ -4,7 +4,7 @@ import openai as openai
 from django.shortcuts import render
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect, JsonResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.urls import reverse
 # Create your views here.
@@ -166,6 +166,9 @@ def addfriend_page(request, user_name):
             else:
                 messages.error(request, 'INVALID INPUT!')
         return render(request, 'Home/addfriend.html', {'user_name': user_name})
+
+
+
 
 
 def login(request):
@@ -425,3 +428,50 @@ def password_reset(request, user_name):
             messages.error(request, 'WRONG USER PASSWORD ENTERED!!!!')
 
     return render(request, 'Home/updatepassword.html', {'user_name': username})
+
+
+
+def addfriend_page(request, user_name):
+    if User.objects.filter(username=user_name).exists():
+        user = User.objects.get(username=user_name)
+        user_email = user.email
+        if request.method == 'POST':
+            friend_email = request.POST['friend_email']
+            value = 'T'
+            user = ConverseNetUser.objects.all()
+            if user_email != friend_email:
+                if user.filter(email=user_email).exists() and user.filter(email=friend_email).exists():
+                    us1 = ConverseNetUser.objects.get(email=user_email)
+                    us2 = ConverseNetUser.objects.get(email=friend_email)
+                    fi1 = FriendsThread.objects.filter(friends_User_id_Person1=us1)
+                    for fi in fi1:
+                        if fi.friends_User_id_Person2 == us2:
+                            value = 'f'
+                            break
+                    fi1 = FriendsThread.objects.filter(friends_User_id_Person2=us1)
+                    for fi in fi1:
+                        if fi.friends_User_id_Person1 == us2:
+                            value = 'f'
+                            break
+                    if value == 'T':
+                        u1 = FriendsThread(friends_User_id_Person1=us1, friends_User_id_Person2=us2)
+                        u1.save()
+                        # Get the list of friends for the user
+                        friends_list = FriendsThread.objects.filter(friends_User_id_Person1=us1)
+                        return render(request, 'Home/addfriend.html', {'user_name': user_name, 'friends_list': friends_list})
+                    else:
+                        messages.error(request, 'ALREADY A FRIEND !! ')
+                else:
+                    messages.error(request, 'THE PERSON DO NOT EXIST!')
+            else:
+                messages.error(request, 'INVALID INPUT!')
+        else:
+            # Get the list of friends for the user
+            us1 = ConverseNetUser.objects.get(email=user_email)
+            friends_list = FriendsThread.objects.filter(friends_User_id_Person1=us1)
+            return render(request, 'Home/addfriend.html', {'user_name': user_name, 'friends_list': friends_list})
+
+
+
+
+
