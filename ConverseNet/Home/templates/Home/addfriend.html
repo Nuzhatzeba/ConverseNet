@@ -239,7 +239,7 @@ position:absolute;
                      {%csrf_token%}
                <span id="ic" style="font-size:38px;position:relative;left:180px;top:-50px;color:green;visibility: hidden" class="material-icons"> check</span>
 
-               <p id="me">Friends List:</p>
+               <p id="me" style="font-size:36px;color:black">Friends List</p>
                  <ul>
                      {% for friend_thread in friends_list %}
                      <li>{{ friend_thread.friends_User_id_Person2.first_name }} {{ friend_thread.friends_User_id_Person2.last_name }}
