@@ -34,10 +34,10 @@
               <form method="POST" >
               {% csrf_token %}
               <div class="flex">
-              <label class="font-bold text-slate-600 mr-16">First Name : </label><input placeholder="First Name" class="input-field " name = "first_name" type="text">
+              <label class="font-bold text-slate-600 mr-16">First Name : </label><input placeholder="First Name" class="input-field " name = "firstname" type="text">
               </div><br>
               <div class="flex">
-              <label class="font-bold text-slate-600 mr-16">Last Name :</label><input placeholder="Last Name" class="input-field" name = "last_name"type="text">
+              <label class="font-bold text-slate-600 mr-16">Last Name :</label><input placeholder="Last Name" class="input-field" name = "lastname"type="text">
               </div><br>
               <div class="flex">
                   <label class="font-bold text-slate-600 mr-10">Email Address :</label><input placeholder="Email Address" class="input-field" name = "email" type="text">
@@ -64,6 +64,7 @@
                    </form>
               <div class="flex items-center">
               <p>Already have an Account ?</p> <a href="{% url 'login' %}" class = "btn btn-xs sm:btn-sm md:btn-md lg:btn-sm font-medium bg-[#77A8CC] text-[#FFF]"><p style="color : #FFF ">  LOG-IN </p> </a>
+                  {% include 'Home/flash-msg.html' %}
 </div>
           </div>
       </div>
